@@ -5,7 +5,7 @@ export default function apiLogging (request, response, next) {
 
   response.on('finish', () => {
     const logMeta = _buildLogMeta(request, response)
-    const logLevel = _getLogLevel(logMeta.statusCode)
+    const logLevel = _getLogLevel(logMeta.res.statusCode)
     httpLogger[logLevel](logMeta)
   })
 
@@ -42,7 +42,7 @@ function _buildLogMeta (req, res) {
   const responseMessage = resBody.message || ''
   const resHeaders = res.getHeaders()
 
-  const message = `[HTTP/${httpVersion}] ${method} ${url} | ${statusCode} ${status} | ${responseMessage} ${responseTime}ms`
+  const message = `[HTTP/${httpVersion}] ${method} ${requestUrl} | ${statusCode} ${status} | ${responseMessage} ${responseTime}ms`
 
   const logMeta = {
     type: 'REQ_RES_LOG',
@@ -66,6 +66,7 @@ function _buildLogMeta (req, res) {
       responseTime
     }
   }
+
   return logMeta
 }
 

@@ -31,7 +31,7 @@
     "./ResponseBody": "./src/classes/ResponseBody.mjs"
   },
   "dependencies": {
-    "@am92/api-crypto": "^1.0.1",
+    "@am92/api-crypto": "^1.0.2",
     "@am92/api-logger": "^1.0.0",
     "express-http-context": "^1.2.4",
     "lodash": "^4.17.21",

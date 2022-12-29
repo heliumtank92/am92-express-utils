@@ -1,10 +1,14 @@
 import _ from 'lodash'
+import logger from '@am92/api-logger'
+
 import DEBUG from '../DEBUG.mjs'
 import decryptCryptoKey from '../middlewares/decryptCryptoKey.mjs'
 import decryptPayload from '../middlewares/decryptPayload.mjs'
 import encryptPayload from '../middlewares/encryptPayload.mjs'
+import routeSanity from '../middlewares/routeSanity.mjs'
+import asyncWrapper from './asyncWrapper.mjs'
 
-export default function configureRouter (Router, masterConfig, customConfig) {
+export default function configureRouter(Router, masterConfig, customConfig) {
   const config = _.merge(masterConfig, customConfig)
 
   const {
@@ -13,28 +17,38 @@ export default function configureRouter (Router, masterConfig, customConfig) {
   } = config
 
   // Pre-route Middlewares
-  preMiddlewares.forEach(Router.use)
+  preMiddlewares.forEach(middleware => Router.use(asyncWrapper(middleware)))
 
   // Resource Route Building
   buildRoutes(Router, config)
 
   // Post-route Middlewares
-  postMiddlewares.forEach(Router.use)
+  postMiddlewares.forEach(middleware => Router.use(asyncWrapper(middleware)))
 
   return Router
 }
 
-function buildRoutes (Router, config) {
+function buildRoutes(Router, config) {
   const { routerName, routesConfig } = config
   const routes = _.keys(routesConfig)
   const disabledRouted = []
 
   routes.forEach(route => {
     const routeConfig = routesConfig[route]
-    const { method, path, pipeline = [], enabled = false, disbaleCrypto = false } = routeConfig || {}
+    const {
+      method,
+      path,
+
+      prePipeline = [],
+      pipeline = [],
+      postPipeline = [],
+
+      enabled = false,
+      disbaleCrypto = false
+    } = routeConfig || {}
 
     if (!method) {
-      console.error(`[Error] Unable to Configure Route for Router '${routerName}':`, route)
+      logger.error(`Unable to Configure Route for Router '${routerName}':`, route)
       return
     }
 
@@ -43,20 +57,25 @@ function buildRoutes (Router, config) {
       return
     }
 
-    let routePipeline = pipeline
+    let preCryptoPipeline = [decryptCryptoKey, decryptPayload]
+    let postCryptoPipeline = [encryptPayload]
     if (!disbaleCrypto && !DEBUG.crypto) {
-      routePipeline = [decryptCryptoKey, decryptPayload, ...pipeline, encryptPayload]
+      preCryptoPipeline = []
+      postCryptoPipeline = []
     }
 
-    Router[method](path, routeSanity, ...routePipeline)
+    Router[method](
+      path,
+      routeSanity,
+      ..._.map(prePipeline, asyncWrapper),
+      ..._.map(preCryptoPipeline, asyncWrapper),
+      ..._.map(pipeline, asyncWrapper),
+      ..._.map(postCryptoPipeline, asyncWrapper),
+      ..._.map(postPipeline, asyncWrapper)
+    )
   })
 
   if (disabledRouted.length) {
-    console.warn(`[Warn] Disabled Routes for Router '${routerName}':`, disabledRouted.join(', '))
+    logger.warn(`Disabled Routes for Router '${routerName}':`, disabledRouted.join(', '))
   }
-}
-
-function routeSanity (request, response, next) {
-  request.isMatch = true
-  process.nextTick(next)
 }
