@@ -27,8 +27,6 @@ function _buildLogMeta (req, res) {
   } = req
 
   const httpVersion = `${httpVersionMajor}.${httpVersionMinor}`
-  const userAgent = req.get('User-Agent')
-  const referrer = req.get('Referrer')
   const requestIp = ipAddress || _remoteAddress || remoteAddress || ''
   const requestUrl = originalUrl || url
 
@@ -44,7 +42,7 @@ function _buildLogMeta (req, res) {
   const responseMessage = resBody.message || ''
   const resHeaders = res.getHeaders()
 
-  const message = `HTTP ${method} ${url} | ${statusCode} ${status} | ${responseMessage} ${responseTime}ms`
+  const message = `[HTTP/${httpVersion}] ${method} ${url} | ${statusCode} ${status} | ${responseMessage} ${responseTime}ms`
 
   const logMeta = {
     type: 'REQ_RES_LOG',

@@ -6,6 +6,7 @@ import handleResponse from '../middlewares/handleResponse.mjs'
 import handleError from '../middlewares/handleError.mjs'
 
 import { REQUEST_ID_HEADER_KEY, SESSION_ID_HEADER_KEY } from '../CONSTANTS.mjs'
+import apiLogging from '../middlewares/apiLogging.mjs'
 
 export default function routesInitializer (app, Routes) {
   if (!app || !app.use) {
@@ -14,6 +15,7 @@ export default function routesInitializer (app, Routes) {
   }
 
   // Initial Route Pipeline
+  app.use('*', apiLogging)
   app.use('*', httpContext.middleware)
   app.use('*', extractHeaders)
 

@@ -2,7 +2,7 @@ const { NODE_ENV, DEBUG: debug } = process.env
 
 const DEBUG_ID = 'expressUtils'
 const isProduction = NODE_ENV === 'production'
-const debugAll = !isProduction || debug === '*' || debug.includes(`${DEBUG_ID}:*`)
+const debugAll = !isProduction || debug === '*' || debug?.includes(`${DEBUG_ID}:*`)
 
 const DEBUG = {
   crypto: debugAll
