@@ -1,4 +1,8 @@
 import _ from 'lodash'
+import DEBUG from '../DEBUG.mjs'
+import decryptCryptoKey from '../middlewares/decryptCryptoKey.mjs'
+import decryptPayload from '../middlewares/decryptPayload.mjs'
+import encryptPayload from '../middlewares/encryptPayload.mjs'
 
 export default function configureRouter (Router, masterConfig, customConfig) {
   const config = _.merge(masterConfig, customConfig)
@@ -27,7 +31,7 @@ function buildRoutes (Router, config) {
 
   routes.forEach(route => {
     const routeConfig = routesConfig[route]
-    const { method, path, pipeline = [], enabled = false } = routeConfig || {}
+    const { method, path, pipeline = [], enabled = false, disbaleCrypto = false } = routeConfig || {}
 
     if (!method) {
       console.error(`[Error] Unable to Configure Route for Router '${routerName}':`, route)
@@ -39,7 +43,12 @@ function buildRoutes (Router, config) {
       return
     }
 
-    Router[method](path, routeSanity, ...pipeline)
+    let routePipeline = pipeline
+    if (!disbaleCrypto && !DEBUG.crypto) {
+      routePipeline = [decryptCryptoKey, decryptPayload, ...pipeline, encryptPayload]
+    }
+
+    Router[method](path, routeSanity, ...routePipeline)
   })
 
   if (disabledRouted.length) {

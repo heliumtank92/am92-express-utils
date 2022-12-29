@@ -1,6 +1,6 @@
 {
   "name": "@am92/express-utils",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Utilities for Express Framework",
   "type": "module",
   "main": "src/ExpressUtils.mjs",
@@ -24,14 +24,15 @@
   ],
   "license": "MIT",
   "exports": {
-    "./initializeRoutes": "./src/initializeRoutes/index.mjs",
-    "./asyncWrapper": "./src/resourceHelpers/asyncWrapper.mjs",
-    "./configureRouter": "./src/resourceHelpers/configureRouter.mjs",
+    "./initializeRoutes": "./src/lib/initializeRoutes.mjs",
+    "./configureRouter": "./src/lib/configureRouter.mjs",
     "./httpContext": "./src/httpContext.mjs",
     "./CustomError": "./src/classes/CustomError.mjs",
     "./ResponseBody": "./src/classes/ResponseBody.mjs"
   },
   "dependencies": {
+    "@am92/api-crypto": "^1.0.1",
+    "@am92/api-logger": "^1.0.0",
     "express-http-context": "^1.2.4",
     "lodash": "^4.17.21",
     "nanoid": "^4.0.0"

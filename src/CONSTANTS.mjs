@@ -1,15 +1,9 @@
-const DEFAULT_ERROR_MSG = 'Unhandled Error'
-const DEFAULT_ERROR_STATUS_CODE = 500
-const DEFAULT_ERROR_CODE = 'GENERIC_ERROR_CODE'
+export const DEFAULT_ERROR_MSG = 'Unhandled Error'
+export const DEFAULT_ERROR_STATUS_CODE = 500
+export const DEFAULT_ERROR_CODE = 'GENERIC_ERROR_CODE'
 
-const REQUEST_ID_HEADER_KEY = 'X-Request-Id'
-const SESSION_ID_HEADER_KEY = 'X-Session-Id'
+export const REQUEST_ID_HEADER_KEY = 'X-Request-Id'
+export const SESSION_ID_HEADER_KEY = 'X-Session-Id'
 
-export {
-  DEFAULT_ERROR_MSG,
-  DEFAULT_ERROR_STATUS_CODE,
-  DEFAULT_ERROR_CODE,
-
-  REQUEST_ID_HEADER_KEY,
-  SESSION_ID_HEADER_KEY
-}
+export const CLIENT_ID_HEADER_KEY = 'X-Client-Id'
+export const ENCRYPTION_KEY_HEADER_KEY = 'X-Api-Encryption-Key'

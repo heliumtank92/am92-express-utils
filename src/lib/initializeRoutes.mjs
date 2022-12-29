@@ -2,8 +2,8 @@ import _ from 'lodash'
 import { nanoid } from 'nanoid'
 import httpContext from 'express-http-context'
 
-import handleResponse from './handleResponse.mjs'
-import handleError from './handleError.mjs'
+import handleResponse from '../middlewares/handleResponse.mjs'
+import handleError from '../middlewares/handleError.mjs'
 
 import { REQUEST_ID_HEADER_KEY, SESSION_ID_HEADER_KEY } from '../CONSTANTS.mjs'
 
