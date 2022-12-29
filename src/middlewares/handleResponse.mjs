@@ -1,22 +1,14 @@
 import ResponseBody from '../classes/ResponseBody.mjs'
 
-export default function handleResponse (request, response, next) {
+export default function handleExpressResponse (request, response, next) {
   let responseHandler
 
   // Handle Response for No Route
   const { isMatch } = request
   responseHandler = !isMatch && _handleNoRouteResponse
 
-  // Handle Response for EncryptedBody / Error / PlaintextBody
-  const { encryptedBody, error } = response
-  responseHandler = responseHandler || (
-    encryptedBody
-      ? _handleDataResponse
-      : (error
-          ? _handleErrorResponse
-          : _handleDataResponse
-        )
-  )
+  // Handle Response for EncryptedBody / PlaintextBody
+  responseHandler = responseHandler || _handleDataResponse
 
   responseHandler(request, response, next)
 }
@@ -37,19 +29,6 @@ function _handleDataResponse (request, response, next) {
     : _sendResponse
 
   handler(request, response, next)
-}
-
-function _handleErrorResponse (request, response, next) {
-  const { error } = response
-
-  if (error.constructor.name === ResponseBody.name) {
-    response.body = error
-  } else {
-    const { statusCode = 500, message = 'Unhandled Error' } = error
-    response.body = new ResponseBody(statusCode, message, undefined, error)
-  }
-
-  return _sendResponse(request, response, next)
 }
 
 function _sendResponse (request, response, next) {
