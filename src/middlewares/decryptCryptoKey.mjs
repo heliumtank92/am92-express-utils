@@ -12,8 +12,8 @@ export default async function decryptCryptoKey (request, response, next) {
   // Decrypt Key
   const plainTextKey = await ApiCrypto.decryptKey(clientId, ciphertextKey)
 
-  httpContext.set(`headers.${CLIENT_ID_HEADER_KEY.toLowerCase()}`, clientId)
-  httpContext.set(`headers.${ENCRYPTION_KEY_HEADER_KEY.toLowerCase()}`, plainTextKey)
+  httpContext.set(`headers.${CLIENT_ID_HEADER_KEY}`, clientId)
+  httpContext.set(`headers.${ENCRYPTION_KEY_HEADER_KEY}`, plainTextKey)
   next()
 }
 

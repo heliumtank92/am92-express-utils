@@ -20,7 +20,7 @@ export default function handleError (piplelineError, request, response, next) {
   }
 
   // Encrypt if Key Encryption Key Exists
-  const plaintextKey = httpContext.get(`headers.${ENCRYPTION_KEY_HEADER_KEY.toLowerCase()}`)
+  const plaintextKey = httpContext.get(`headers.${ENCRYPTION_KEY_HEADER_KEY}`)
   if (plaintextKey) {
     const bodyString = JSON.stringify(response.body)
     const encryptedPayload = ApiCrypto.encryptData(bodyString, plaintextKey)

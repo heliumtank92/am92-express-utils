@@ -7,7 +7,7 @@ export default function decryptPayload (request, response, next) {
   const { body = {} } = request
   const { payload = '' } = body
 
-  const plaintextKey = httpContext.get(`headers.${ENCRYPTION_KEY_HEADER_KEY.toLowerCase()}`)
+  const plaintextKey = httpContext.get(`headers.${ENCRYPTION_KEY_HEADER_KEY}`)
 
   const plaintextPayload = ApiCrypto.decryptData(payload, plaintextKey)
   request.body = JSON.parse(plaintextPayload)

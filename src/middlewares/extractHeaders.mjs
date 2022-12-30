@@ -10,17 +10,12 @@ export default function extractHeaders (request, response, next) {
   _.forEach(headers, (value = '', header) => {
     const key = header.toLowerCase()
 
-    if (key === 'authorization') {
-      const values = value.split(' ')
-      value = values[1] || values[0]
-    }
-
-    if (key === REQUEST_ID_HEADER_KEY.toLowerCase()) {
+    if (key === REQUEST_ID_HEADER_KEY) {
       requestId = value
       value = value || nanoid()
     }
 
-    if (key === SESSION_ID_HEADER_KEY.toLowerCase()) {
+    if (key === SESSION_ID_HEADER_KEY) {
       sessionId = value
       value = value || nanoid()
     }
@@ -29,11 +24,11 @@ export default function extractHeaders (request, response, next) {
   })
 
   if (!requestId) {
-    httpContext.set(`headers.${REQUEST_ID_HEADER_KEY.toLowerCase()}`, nanoid())
+    httpContext.set(`headers.${REQUEST_ID_HEADER_KEY}`, nanoid())
   }
 
   if (!sessionId) {
-    httpContext.set(`headers.${SESSION_ID_HEADER_KEY.toLowerCase()}`, nanoid())
+    httpContext.set(`headers.${SESSION_ID_HEADER_KEY}`, nanoid())
   }
 
   return process.nextTick(next)

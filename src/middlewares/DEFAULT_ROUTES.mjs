@@ -10,14 +10,17 @@ import { CLIENT_ID_HEADER_KEY } from '../CONSTANTS.mjs'
 const DEFAULT_ROUTES = [
   {
     path: '/health',
+    method: 'get',
     routePipeline: [routeSanity, asyncWrapper(healthHandler)]
   },
   {
     path: '/version',
+    method: 'get',
     routePipeline: [routeSanity, asyncWrapper(versionHandler)]
   },
   {
     path: '/handshake',
+    method: 'get',
     routePipeline: [routeSanity, asyncWrapper(handshakeHandler)]
   }
 ]
@@ -31,8 +34,8 @@ function healthHandler (request, response, next) {
 
 function versionHandler (request, response, next) {
   const {
-    npm_package_name: name,
-    npm_package_version: version
+    npm_package_name: name = '',
+    npm_package_version: version = ''
   } = process.env
 
   response.body = new ResponseBody(200, 'Version Check Succesful', { name, version })
@@ -40,7 +43,7 @@ function versionHandler (request, response, next) {
 }
 
 async function handshakeHandler (request, response, next) {
-  const clientId = httpContext.get(`headers.${CLIENT_ID_HEADER_KEY.toLowerCase()}`)
+  const clientId = httpContext.get(`headers.${CLIENT_ID_HEADER_KEY}`)
   const publicKey = await ApiCrypto.getPublicKey(clientId)
   response.body = new ResponseBody(200, 'Handshake Succesful', { publicKey })
   next()

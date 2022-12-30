@@ -1,6 +1,6 @@
 {
   "name": "@am92/express-utils",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Utilities for Express Framework",
   "type": "module",
   "main": "src/ExpressUtils.mjs",
@@ -24,16 +24,17 @@
   ],
   "license": "MIT",
   "exports": {
-    "./initializeRoutes": "./src/lib/initializeRoutes.mjs",
+    "./asyncWrapper": "./src/lib/asyncWrapper.mjs",
     "./configureRouter": "./src/lib/configureRouter.mjs",
     "./httpContext": "./src/lib/httpContext.mjs",
+    "./initializeRoutes": "./src/lib/initializeRoutes.mjs",
     "./CustomError": "./src/classes/CustomError.mjs",
     "./ResponseBody": "./src/classes/ResponseBody.mjs",
     "./CONSTANTS": "./src/CONSTANTS.mjs"
   },
   "dependencies": {
     "@am92/api-crypto": "^1.0.2",
-    "@am92/api-logger": "^1.0.0",
+    "@am92/api-logger": "^1.0.2",
     "express-http-context": "^1.2.4",
     "lodash": "^4.17.21",
     "nanoid": "^4.0.0"
@@ -41,6 +42,8 @@
   "keywords": [
     "express",
     "expressjs",
-    "node"
+    "node",
+    "api crypto",
+    "api logging"
   ]
 }

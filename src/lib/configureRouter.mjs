@@ -44,11 +44,11 @@ function buildRoutes (Router, config) {
       postPipeline = [],
 
       enabled = false,
-      disbaleCrypto = false
+      disableCrypto = false
     } = routeConfig || {}
 
     if (!method) {
-      logger.error(`Unable to Configure Route for Router '${routerName}':`, route)
+      logger.error(`Unable to Configure Route for Router '${routerName}': ${route}`)
       return
     }
 
@@ -59,7 +59,7 @@ function buildRoutes (Router, config) {
 
     let preCryptoPipeline = [decryptCryptoKey, decryptPayload]
     let postCryptoPipeline = [encryptPayload]
-    if (!disbaleCrypto && !DEBUG.crypto) {
+    if (disableCrypto || DEBUG.disableCrypto) {
       preCryptoPipeline = []
       postCryptoPipeline = []
     }
@@ -76,6 +76,6 @@ function buildRoutes (Router, config) {
   })
 
   if (disabledRouted.length) {
-    logger.warn(`Disabled Routes for Router '${routerName}':`, disabledRouted.join(', '))
+    logger.warn(`Disabled Routes for Router '${routerName}': ${disabledRouted.join(', ')}`)
   }
 }

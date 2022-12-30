@@ -19,7 +19,7 @@ export default function routesInitializer (app, Routes) {
   app.use('*', extractHeaders)
 
   // Default Routes
-  DEFAULT_ROUTES.forEach(route => app.use(route.path, ...route.routePipeline))
+  DEFAULT_ROUTES.forEach(route => app[route.method](route.path, ...route.routePipeline))
 
   // Custom Routes
   Routes.forEach(route => app.use(route.path, route.router))

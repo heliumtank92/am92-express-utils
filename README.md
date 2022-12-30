@@ -47,8 +47,11 @@ $ npm install --save @am92/express-utils
 <br />
 
 ## Resources
-* [Pug](https://www.npmjs.com/package/pug)
-* [Camaro](https://www.npmjs.com/package/camaro)
+* [Api Crypto](https://https://www.npmjs.com/package/@am92/api-crypto)
+* [Api Logger](https://https://www.npmjs.com/package/@am92/api-logger)
+* [Express Http Context](https://https://www.npmjs.com/package/express-http-context)
+* [Lodash](https://https://www.npmjs.com/package/lodash)
+* [Nanoid](https://https://www.npmjs.com/package/nanoid)
 
 <br />
 
