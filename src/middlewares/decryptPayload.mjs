@@ -1,5 +1,5 @@
 import ApiCrypto from '@am92/api-crypto'
-import httpContext from '../httpContext.mjs'
+import httpContext from '../lib/httpContext.mjs'
 
 import { ENCRYPTION_KEY_HEADER_KEY } from '../CONSTANTS.mjs'
 

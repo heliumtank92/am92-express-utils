@@ -1,5 +1,5 @@
 import httpContext from 'express-http-context'
-import { REQUEST_ID_HEADER_KEY, SESSION_ID_HEADER_KEY } from './CONSTANTS.mjs'
+import { REQUEST_ID_HEADER_KEY, SESSION_ID_HEADER_KEY } from '../CONSTANTS.mjs'
 
 httpContext.getRequestId = getRequestId
 httpContext.getSessionId = getSessionId

@@ -1,4 +1,4 @@
-import httpContext from 'express-http-context'
+import httpContext from '../lib/httpContext.mjs'
 import ResponseBody from '../classes/ResponseBody.mjs'
 import { REQUEST_ID_HEADER_KEY, SESSION_ID_HEADER_KEY } from '../CONSTANTS.mjs'
 

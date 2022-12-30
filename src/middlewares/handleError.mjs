@@ -1,9 +1,10 @@
+import ApiCrypto from '@am92/api-crypto'
+import httpContext from '../lib/httpContext.mjs'
+import handleResponse from './handleResponse.mjs'
+
 import ResponseBody from '../classes/ResponseBody.mjs'
 import CustomError from '../classes/CustomError.mjs'
-import handleResponse from './handleResponse.mjs'
-import httpContext from '../httpContext.mjs'
 import { ENCRYPTION_KEY_HEADER_KEY } from '../CONSTANTS.mjs'
-import ApiCrypto from '@am92/api-crypto'
 
 export default function handleError (piplelineError, request, response, next) {
   if (!piplelineError) { return process.nextTick(next) }

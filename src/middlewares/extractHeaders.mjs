@@ -1,6 +1,6 @@
 import _ from 'lodash'
-import httpContext from 'express-http-context'
 import { nanoid } from 'nanoid'
+import httpContext from '../lib/httpContext.mjs'
 import { REQUEST_ID_HEADER_KEY, SESSION_ID_HEADER_KEY } from '../CONSTANTS.mjs'
 
 export default function extractHeaders (request, response, next) {

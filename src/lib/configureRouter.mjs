@@ -8,7 +8,7 @@ import encryptPayload from '../middlewares/encryptPayload.mjs'
 import routeSanity from '../middlewares/routeSanity.mjs'
 import asyncWrapper from './asyncWrapper.mjs'
 
-export default function configureRouter(Router, masterConfig, customConfig) {
+export default function configureRouter (Router, masterConfig, customConfig) {
   const config = _.merge(masterConfig, customConfig)
 
   const {
@@ -28,7 +28,7 @@ export default function configureRouter(Router, masterConfig, customConfig) {
   return Router
 }
 
-function buildRoutes(Router, config) {
+function buildRoutes (Router, config) {
   const { routerName, routesConfig } = config
   const routes = _.keys(routesConfig)
   const disabledRouted = []
