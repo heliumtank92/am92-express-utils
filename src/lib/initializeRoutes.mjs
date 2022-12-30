@@ -1,4 +1,4 @@
-import httpContext from 'express-http-context'
+import expressHttpContext from 'express-http-context'
 
 import apiLogging from '../middlewares/apiLogging.mjs'
 import extractHeaders from '../middlewares/extractHeaders.mjs'
@@ -15,7 +15,7 @@ export default function routesInitializer (app, Routes) {
 
   // Initial Route Pipeline
   app.use('*', apiLogging)
-  app.use('*', httpContext.middleware)
+  app.use('*', expressHttpContext.middleware)
   app.use('*', extractHeaders)
 
   // Default Routes
