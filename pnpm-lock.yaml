@@ -1,14 +1,14 @@
 lockfileVersion: 5.4
 
 specifiers:
-  '@am92/api-crypto': ^1.0.2
+  '@am92/api-crypto': ^1.0.5
   '@am92/api-logger': ^1.0.3
   express-http-context: ^1.2.4
   lodash: ^4.17.21
   nanoid: ^4.0.0
 
 dependencies:
-  '@am92/api-crypto': 1.0.2
+  '@am92/api-crypto': 1.0.5
   '@am92/api-logger': 1.0.3
   express-http-context: 1.2.4
   lodash: 4.17.21
@@ -16,13 +16,13 @@ dependencies:
 
 packages:
 
-  /@am92/api-crypto/1.0.2:
-    resolution: {integrity: sha512-FrprIHRK52qjo/l6zeJ3mjql9xDJRAJW6g0/e9973mhYRUp8GRodAHbttgQj3VTqIyDl9iD3F8HZRB8cGZEz/g==}
+  /@am92/api-crypto/1.0.5:
+    resolution: {integrity: sha512-lsgy/Y8ls1JR5aNR3nOp8EFobjFeXALhhikqdnQY5oJnpHBAD9zAYPYomX01Kd+txMCT4QVxMXX7fL0yQOuklg==}
     requiresBuild: true
     dependencies:
-      '@am92/jose-crypto': 1.0.3
-      '@am92/kms': 1.0.3
-      '@am92/redis': 1.0.1
+      '@am92/jose-crypto': 1.0.4
+      '@am92/kms': 1.0.4
+      '@am92/redis': 1.0.4
       moment: 2.29.4
     transitivePeerDependencies:
       - aws-crt
@@ -36,13 +36,13 @@ packages:
       winston: 3.8.2
     dev: false
 
-  /@am92/jose-crypto/1.0.3:
-    resolution: {integrity: sha512-RoarPXQbB6a6sCsclc22RlIsojkkCYrT9QteYd1Zcut/8KCv7aXyvOJ9zQvPTBYmcPdtl1VguAEJgVBIo0svVw==}
+  /@am92/jose-crypto/1.0.4:
+    resolution: {integrity: sha512-IPsMDerOzUD/n6g/bIm6HOTBpMJq3Ahv0fqh4PaHQpCJbPe8Zk2oEFHV0ot21aXOlK4Zj1Ur2BOhvgOdvt3PWg==}
     requiresBuild: true
     dev: false
 
-  /@am92/kms/1.0.3:
-    resolution: {integrity: sha512-Xzx0sNnC4aHiL3aO/0PGShCwJt9T4Pgb1IAeRCuATT9+fc/+H0f+bUlPjI359U3BPVkqVBii0nc1sXvxCEbBvA==}
+  /@am92/kms/1.0.4:
+    resolution: {integrity: sha512-1Qgkcm8HpLinlcCo6GqmPKPYWtjsQjGrRfp8u4JxTqlIFalFQeEH5yDJ3MiUvaEA2Y2QCIeoaJG7C1ePEuGJ5Q==}
     requiresBuild: true
     dependencies:
       '@aws-sdk/client-kms': 3.241.0
@@ -50,8 +50,8 @@ packages:
       - aws-crt
     dev: false
 
-  /@am92/redis/1.0.1:
-    resolution: {integrity: sha512-tHI+A3JbLT4yc7BZCpYdZm3Shaa0aildv2pSMj2jmkOlTYU+wHK0ou2xpesuR+i6k4GGN+a3DjybAzQo2LQRGA==}
+  /@am92/redis/1.0.4:
+    resolution: {integrity: sha512-p9IlCNpocd6bOyJESBH0nJM5NLjqQtgCMgPnOyAsf3Cp8FwCp3XwvsFyodNp/CGokGwiOeX54F1eeKeUactmuA==}
     requiresBuild: true
     dependencies:
       redis: 4.5.1
