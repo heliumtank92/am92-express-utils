@@ -2,14 +2,14 @@ lockfileVersion: 5.4
 
 specifiers:
   '@am92/api-crypto': ^1.0.2
-  '@am92/api-logger': ^1.0.2
+  '@am92/api-logger': ^1.0.3
   express-http-context: ^1.2.4
   lodash: ^4.17.21
   nanoid: ^4.0.0
 
 dependencies:
   '@am92/api-crypto': 1.0.2
-  '@am92/api-logger': 1.0.2
+  '@am92/api-logger': 1.0.3
   express-http-context: 1.2.4
   lodash: 4.17.21
   nanoid: 4.0.0
@@ -28,8 +28,8 @@ packages:
       - aws-crt
     dev: false
 
-  /@am92/api-logger/1.0.2:
-    resolution: {integrity: sha512-zN4vBGLKrf2rz2Und4uihG+4JTyJwFugZaFuCEdzAgycSk72izMubRDbnVcaHGoqctnTmvDXH/h5O34GAUjerg==}
+  /@am92/api-logger/1.0.3:
+    resolution: {integrity: sha512-QpOe6LCrpgsgAsJXkRvwzY/qwe4KJ6kqHc/eDaeCAnM7fWf+qoa6jGBUBvEIv51w2ac+mgaPVW9gTIgewVRSPw==}
     requiresBuild: true
     dependencies:
       chalk: 5.2.0
