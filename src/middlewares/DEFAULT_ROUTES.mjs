@@ -6,6 +6,7 @@ import routeSanity from './routeSanity.mjs'
 import ResponseBody from '../classes/ResponseBody.mjs'
 
 import { CLIENT_ID_HEADER_KEY } from '../CONSTANTS.mjs'
+import DEBUG from '../DEBUG.mjs'
 
 const DEFAULT_ROUTES = [
   {
@@ -44,7 +45,7 @@ function versionHandler (request, response, next) {
 
 async function handshakeHandler (request, response, next) {
   const clientId = httpContext.get(`headers.${CLIENT_ID_HEADER_KEY}`)
-  const publicKey = await ApiCrypto.getPublicKey(clientId)
+  const publicKey = DEBUG.disableCrypto ? '' : await ApiCrypto.getPublicKey(clientId)
   response.body = new ResponseBody(200, 'Handshake Succesful', { publicKey })
   next()
 }
