@@ -6,9 +6,11 @@ export default function handleExpressResponse (request, response, next) {
   // Set Headers
   _setHeaders(request, response)
 
-  // Handle Response for No Route / EncryptedBody / PlaintextBody
-  const { isMatch } = request
-  const responseHandler = (!isMatch && _handleNoRouteResponse) || _handleDataResponse
+  // Handle Response for Error / No Route / Response
+  const responseHandler = (response.isError || request.isMatch)
+    ? _handleDataResponse
+    : _handleNoRouteResponse
+
   responseHandler(request, response, next)
 }
 
@@ -29,30 +31,28 @@ function _setHeaders (request, response) {
 function _handleNoRouteResponse (request, response, next) {
   const { method, originalUrl } = request
   const message = `Cannot ${method} ${originalUrl}`
-  const error = new ResponseBody(404, message)
-  response.status(error.statusCode).json(error)
-}
-
-function _sendResponse (request, response, next) {
-  let resBody = response.encryptedBody || response.body || {}
-  const { statusCode } = resBody
-
-  if (!resBody || !statusCode) {
-    resBody = new ResponseBody(500, 'Response Data Not Found!')
-  }
-
+  const resBody = new ResponseBody(404, message)
+  response.body = resBody
   response.status(resBody.statusCode).json(resBody)
 }
 
 function _handleDataResponse (request, response, next) {
   const resBody = response.encryptedBody || response.body || {}
-  const { statusCode } = resBody
-
-  const handler = ([301, 302].indexOf(statusCode) > -1)
+  const handler = ([301, 302].indexOf(resBody.statusCode) > -1)
     ? _redirectResponse
     : _sendResponse
 
   handler(request, response, next)
+}
+
+function _sendResponse (request, response, next) {
+  let resBody = response.encryptedBody || response.body || {}
+
+  if (!resBody.statusCode) {
+    resBody = new ResponseBody(500, 'Response Data Not Found!')
+  }
+
+  response.status(resBody.statusCode).json(resBody)
 }
 
 function _redirectResponse (request, response, next) {

@@ -47,16 +47,19 @@ function buildRoutes (Router, config) {
       disableCrypto = false
     } = routeConfig || {}
 
-    if (!method) {
+    // Handle Missing 'path' or 'method'
+    if (!path || !method) {
       logger.error(`Unable to Configure Route for Router '${routerName}': ${route}`)
       return
     }
 
+    // Handle Disabled Routes
     if (!enabled) {
       disabledRouted.push(route)
       return
     }
 
+    // Handle Crypto Pipeline
     let preCryptoPipeline = [decryptCryptoKey, decryptPayload]
     let postCryptoPipeline = [encryptPayload]
     if (disableCrypto || DEBUG.disableCrypto) {
@@ -64,6 +67,7 @@ function buildRoutes (Router, config) {
       postCryptoPipeline = []
     }
 
+    // Configure Respective Pipelines
     Router[method](
       path,
       routeSanity,

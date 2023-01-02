@@ -15,3 +15,6 @@ Thumbs.db
 coverage/
 profile/
 reports/
+tests/
+babel.config.json
+jest.config.json

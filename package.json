@@ -1,12 +1,11 @@
 {
   "name": "@am92/express-utils",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "Utilities for Express Framework",
   "type": "module",
   "main": "src/ExpressUtils.mjs",
   "scripts": {
-    "preinstall": "npx only-allow pnpm",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
   "repository": "git@github.com:heliumtank92/am92-express-utils.git",
   "homepage": "https://github.com/heliumtank92/am92-express-utils#readme",
@@ -33,11 +32,17 @@
     "./CONSTANTS": "./src/CONSTANTS.mjs"
   },
   "dependencies": {
-    "@am92/api-crypto": "^1.0.5",
-    "@am92/api-logger": "^1.0.3",
+    "@am92/api-crypto": "^1.0.6",
+    "@am92/api-logger": "^1.0.4",
     "express-http-context": "^1.2.4",
     "lodash": "^4.17.21",
     "nanoid": "^4.0.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.20.7",
+    "@babel/preset-env": "^7.20.2",
+    "babel-jest": "^29.3.1",
+    "jest": "^29.3.1"
   },
   "keywords": [
     "express",
