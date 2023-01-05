@@ -1,4 +1,5 @@
-import httpContext from 'express-http-context'
+import logger from '@am92/api-logger'
+import expressHttpContext from 'express-http-context'
 
 import apiLogging from '../middlewares/apiLogging.mjs'
 import extractHeaders from '../middlewares/extractHeaders.mjs'
@@ -7,15 +8,17 @@ import handleResponse from '../middlewares/handleResponse.mjs'
 import handleError from '../middlewares/handleError.mjs'
 import DEFAULT_ROUTES from '../middlewares/DEFAULT_ROUTES.mjs'
 
-export default function routesInitializer (app, Routes) {
+import { SERVICE } from '../CONFIG.mjs'
+
+export default function configureApp (app, Routes) {
   if (!app || !app.use) {
-    console.error('[Error] Route Initialization Failed: app / app.use is undefined')
+    logger.error(`[${SERVICE} ExpressUtils] Route Initialization Failed: app / app.use is undefined`)
     return process.exit(1)
   }
 
   // Initial Route Pipeline
   app.use('*', apiLogging)
-  app.use('*', httpContext.middleware)
+  app.use('*', expressHttpContext.middleware)
   app.use('*', extractHeaders)
 
   // Default Routes

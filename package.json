@@ -1,12 +1,15 @@
 {
   "name": "@am92/express-utils",
-  "version": "1.0.5",
+  "version": "1.0.12",
   "description": "Utilities for Express Framework",
   "type": "module",
   "main": "src/ExpressUtils.mjs",
+  "module": "src/ExpressUtils.mjs",
   "scripts": {
-    "preinstall": "npx only-allow pnpm",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo 'Error: no test specified'",
+    "preversion": "pnpm test",
+    "version": "echo 'Versioning'",
+    "postversion": "git push && git push --tags"
   },
   "repository": "git@github.com:heliumtank92/am92-express-utils.git",
   "homepage": "https://github.com/heliumtank92/am92-express-utils#readme",
@@ -24,17 +27,18 @@
   ],
   "license": "MIT",
   "exports": {
+    ".": "./src/ExpressUtils.mjs",
     "./asyncWrapper": "./src/lib/asyncWrapper.mjs",
     "./configureRouter": "./src/lib/configureRouter.mjs",
     "./httpContext": "./src/lib/httpContext.mjs",
-    "./initializeRoutes": "./src/lib/initializeRoutes.mjs",
+    "./configureApp": "./src/lib/configureApp.mjs",
     "./CustomError": "./src/classes/CustomError.mjs",
     "./ResponseBody": "./src/classes/ResponseBody.mjs",
     "./CONSTANTS": "./src/CONSTANTS.mjs"
   },
   "dependencies": {
-    "@am92/api-crypto": "^1.0.2",
-    "@am92/api-logger": "^1.0.3",
+    "@am92/api-crypto": "^1.0.8",
+    "@am92/api-logger": "^1.0.9",
     "express-http-context": "^1.2.4",
     "lodash": "^4.17.21",
     "nanoid": "^4.0.0"

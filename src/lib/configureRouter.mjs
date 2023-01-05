@@ -8,6 +8,8 @@ import encryptPayload from '../middlewares/encryptPayload.mjs'
 import routeSanity from '../middlewares/routeSanity.mjs'
 import asyncWrapper from './asyncWrapper.mjs'
 
+import { SERVICE } from '../CONFIG.mjs'
+
 export default function configureRouter (Router, masterConfig, customConfig) {
   const config = _.merge(masterConfig, customConfig)
 
@@ -47,16 +49,19 @@ function buildRoutes (Router, config) {
       disableCrypto = false
     } = routeConfig || {}
 
-    if (!method) {
-      logger.error(`Unable to Configure Route for Router '${routerName}': ${route}`)
+    // Handle Missing 'path' or 'method'
+    if (!path || !method) {
+      logger.error(`[${SERVICE} ExpressUtils] Unable to Configure Route for Router '${routerName}': ${route}`)
       return
     }
 
+    // Handle Disabled Routes
     if (!enabled) {
       disabledRouted.push(route)
       return
     }
 
+    // Handle Crypto Pipeline
     let preCryptoPipeline = [decryptCryptoKey, decryptPayload]
     let postCryptoPipeline = [encryptPayload]
     if (disableCrypto || DEBUG.disableCrypto) {
@@ -64,6 +69,7 @@ function buildRoutes (Router, config) {
       postCryptoPipeline = []
     }
 
+    // Configure Respective Pipelines
     Router[method](
       path,
       routeSanity,
@@ -76,6 +82,6 @@ function buildRoutes (Router, config) {
   })
 
   if (disabledRouted.length) {
-    logger.warn(`Disabled Routes for Router '${routerName}': ${disabledRouted.join(', ')}`)
+    logger.warn(`[${SERVICE} ExpressUtils] Disabled Routes for Router '${routerName}': ${disabledRouted.join(', ')}`)
   }
 }
