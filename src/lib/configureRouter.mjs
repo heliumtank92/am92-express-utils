@@ -8,6 +8,8 @@ import encryptPayload from '../middlewares/encryptPayload.mjs'
 import routeSanity from '../middlewares/routeSanity.mjs'
 import asyncWrapper from './asyncWrapper.mjs'
 
+import { SERVICE } from '../CONFIG.mjs'
+
 export default function configureRouter (Router, masterConfig, customConfig) {
   const config = _.merge(masterConfig, customConfig)
 
@@ -49,7 +51,7 @@ function buildRoutes (Router, config) {
 
     // Handle Missing 'path' or 'method'
     if (!path || !method) {
-      logger.error(`Unable to Configure Route for Router '${routerName}': ${route}`)
+      logger.error(`[${SERVICE} ExpressUtils] Unable to Configure Route for Router '${routerName}': ${route}`)
       return
     }
 
@@ -80,6 +82,6 @@ function buildRoutes (Router, config) {
   })
 
   if (disabledRouted.length) {
-    logger.warn(`Disabled Routes for Router '${routerName}': ${disabledRouted.join(', ')}`)
+    logger.warn(`[${SERVICE} ExpressUtils] Disabled Routes for Router '${routerName}': ${disabledRouted.join(', ')}`)
   }
 }
