@@ -15,8 +15,8 @@ export default function handleExpressResponse (request, response, next) {
 }
 
 function _setHeaders (request, response) {
-  const requestId = httpContext.get(`headers.${REQUEST_ID_HEADER_KEY}`)
-  const sessionId = httpContext.get(`headers.${SESSION_ID_HEADER_KEY}`)
+  const requestId = httpContext.getRequestId()
+  const sessionId = httpContext.getSessionId()
 
   const currentExposeHeaders = response.get('Access-Control-Expose-Headers')
   const currentExposeHeadersArray = (currentExposeHeaders && currentExposeHeaders.split(',')) || []

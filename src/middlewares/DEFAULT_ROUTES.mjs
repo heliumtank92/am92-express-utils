@@ -1,12 +1,9 @@
-import httpContext from 'express-http-context'
+import httpContext from '../lib/httpContext.mjs'
 import ApiCrypto from '@am92/api-crypto'
 
 import asyncWrapper from '../lib/asyncWrapper.mjs'
 import routeSanity from './routeSanity.mjs'
 import ResponseBody from '../classes/ResponseBody.mjs'
-
-import { CLIENT_ID_HEADER_KEY } from '../CONSTANTS.mjs'
-import DEBUG from '../DEBUG.mjs'
 
 const DEFAULT_ROUTES = [
   {
@@ -44,8 +41,8 @@ function versionHandler (request, response, next) {
 }
 
 async function handshakeHandler (request, response, next) {
-  const clientId = httpContext.get(`headers.${CLIENT_ID_HEADER_KEY}`)
-  const publicKey = DEBUG.disableCrypto ? '' : await ApiCrypto.getPublicKey(clientId)
+  const clientId = httpContext.getClientId()
+  const publicKey = await ApiCrypto.getPublicKey(clientId)
   response.body = new ResponseBody(200, 'Handshake Succesful', { publicKey })
   next()
 }

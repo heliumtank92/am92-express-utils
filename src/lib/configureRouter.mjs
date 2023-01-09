@@ -1,7 +1,6 @@
 import _ from 'lodash'
 import logger from '@am92/api-logger'
 
-import DEBUG from '../DEBUG.mjs'
 import decryptCryptoKey from '../middlewares/decryptCryptoKey.mjs'
 import decryptPayload from '../middlewares/decryptPayload.mjs'
 import encryptPayload from '../middlewares/encryptPayload.mjs'
@@ -64,7 +63,7 @@ function buildRoutes (Router, config) {
     // Handle Crypto Pipeline
     let preCryptoPipeline = [decryptCryptoKey, decryptPayload]
     let postCryptoPipeline = [encryptPayload]
-    if (disableCrypto || DEBUG.disableCrypto) {
+    if (disableCrypto) {
       preCryptoPipeline = []
       postCryptoPipeline = []
     }
