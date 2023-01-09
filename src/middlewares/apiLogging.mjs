@@ -1,12 +1,10 @@
-import { httpLogger } from '@am92/api-logger'
-
 export default function apiLogging (request, response, next) {
   request.timestamp = Date.now()
 
   response.on('finish', () => {
     const logMeta = _buildLogMeta(request, response)
-    const logLevel = _getLogLevel(logMeta.res.statusCode)
-    httpLogger[logLevel](logMeta)
+    const logFunc = _getLogFunc(logMeta.res.statusCode)
+    logFunc(logMeta)
   })
 
   process.nextTick(next)
@@ -70,8 +68,14 @@ function _buildLogMeta (req, res) {
   return logMeta
 }
 
-function _getLogLevel (statusCode) {
-  if (statusCode >= 200 && statusCode < 300) { return 'success' }
-  if (statusCode >= 300 && statusCode < 400) { return 'info' }
-  return 'error'
+function _getLogFunc (statusCode) {
+  if (statusCode >= 200 && statusCode < 300) {
+    return console.httpSuccess || console.info
+  }
+
+  if (statusCode >= 300 && statusCode < 400) {
+    return console.info
+  }
+
+  return console.error
 }

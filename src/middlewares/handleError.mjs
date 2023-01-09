@@ -4,7 +4,6 @@ import handleResponse from './handleResponse.mjs'
 
 import ResponseBody from '../classes/ResponseBody.mjs'
 import CustomError from '../classes/CustomError.mjs'
-import { ENCRYPTION_KEY_HEADER_KEY } from '../CONSTANTS.mjs'
 
 export default function handleError (piplelineError, request, response, next) {
   if (!piplelineError) { return process.nextTick(next) }
@@ -22,11 +21,12 @@ export default function handleError (piplelineError, request, response, next) {
   }
 
   // Encrypt if Key Encryption Key Exists
-  const plaintextKey = httpContext.get(`headers.${ENCRYPTION_KEY_HEADER_KEY}`)
+  const plaintextKey = httpContext.getEncryptionKey()
   if (plaintextKey) {
     const bodyString = JSON.stringify(response.body)
     const encryptedPayload = ApiCrypto.encryptData(bodyString, plaintextKey)
-    response.encryptedBody = { payload: encryptedPayload }
+    const data = { payload: encryptedPayload }
+    response.encryptedBody = new ResponseBody(200, 'Success', data)
   }
 
   handleResponse(request, response, next)

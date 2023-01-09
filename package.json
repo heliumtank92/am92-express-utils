@@ -1,6 +1,6 @@
 {
   "name": "@am92/express-utils",
-  "version": "1.0.12",
+  "version": "1.0.14",
   "description": "Utilities for Express Framework",
   "type": "module",
   "main": "src/ExpressUtils.mjs",
@@ -37,8 +37,7 @@
     "./CONSTANTS": "./src/CONSTANTS.mjs"
   },
   "dependencies": {
-    "@am92/api-crypto": "^1.0.8",
-    "@am92/api-logger": "^1.0.9",
+    "@am92/api-crypto": "^1.0.9",
     "express-http-context": "^1.2.4",
     "lodash": "^4.17.21",
     "nanoid": "^4.0.0"
