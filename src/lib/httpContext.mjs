@@ -9,6 +9,8 @@ import {
 const httpContext = {
   get: expressHttpContext.get,
   set: expressHttpContext.set,
+  getRequestIp,
+  setRequestIp,
   getRequestId,
   setRequestId,
   getSessionId,
@@ -20,6 +22,14 @@ const httpContext = {
 }
 
 export default httpContext
+
+function getRequestIp () {
+  return expressHttpContext.get('requestIp')
+}
+
+function setRequestIp (requestIp) {
+  return expressHttpContext.set('requestIp', requestIp)
+}
 
 function getRequestId () {
   return expressHttpContext.get(`headers.${REQUEST_ID_HEADER_KEY}`)
