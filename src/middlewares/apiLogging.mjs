@@ -24,7 +24,7 @@ function _buildLogMeta (req, res) {
   } = req
 
   const httpVersion = `${httpVersionMajor}.${httpVersionMinor}`
-  const requestIp = httpContext.getRequestIp()
+  const requestIp = httpContext.get('headers.x-forwarded-for')
   const requestUrl = originalUrl || url
 
   const timestamp = Date.now()

@@ -11,11 +11,6 @@ export default function extractHeaders (request, response, next) {
     httpContext.set(`headers.${key}`, value)
   })
 
-  // Set Request IP in httpContext
-  const requestIp = request.connection?.remoteAddress ||
-    request.socket?.remoteAddress || ''
-  httpContext.setRequestIp(requestIp)
-
   // Handle Request ID Defaulting
   if (!httpContext.getRequestId()) {
     httpContext.setRequestId(nanoid())
