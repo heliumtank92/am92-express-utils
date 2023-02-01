@@ -1,3 +1,5 @@
+import httpContext from '../lib/httpContext.mjs'
+
 export default function apiLogging (request, response, next) {
   request.timestamp = Date.now()
 
@@ -14,9 +16,6 @@ function _buildLogMeta (req, res) {
   const {
     httpVersionMajor,
     httpVersionMinor,
-    ipAddress,
-    _remoteAddress,
-    connection: { remoteAddress } = {},
     originalUrl,
     url,
     method,
@@ -25,7 +24,7 @@ function _buildLogMeta (req, res) {
   } = req
 
   const httpVersion = `${httpVersionMajor}.${httpVersionMinor}`
-  const requestIp = ipAddress || _remoteAddress || remoteAddress || ''
+  const requestIp = httpContext.get('headers.x-forwarded-for')
   const requestUrl = originalUrl || url
 
   const timestamp = Date.now()
