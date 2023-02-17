@@ -1,45 +1,45 @@
 lockfileVersion: 5.4
 
 specifiers:
-  '@am92/api-crypto': ^1.0.12
+  '@am92/api-crypto': ^1.0.14
   express-http-context: ^1.2.4
   lodash: ^4.17.21
   nanoid: ^4.0.1
 
 dependencies:
-  '@am92/api-crypto': 1.0.12
+  '@am92/api-crypto': 1.0.14
   express-http-context: 1.2.4
   lodash: 4.17.21
   nanoid: 4.0.1
 
 packages:
 
-  /@am92/api-crypto/1.0.12:
-    resolution: {integrity: sha512-5YxhLvk8F7ceZWs+bqipR186X603gikDePQc8brUbgoso4Ifa20b8Aa62lBVoeKPz87Goo18g4qyuM8acV5BBg==}
+  /@am92/api-crypto/1.0.14:
+    resolution: {integrity: sha512-dKMGwaHGmRinyiaYpI5NsYDhMPIjZMh62LfMVMwPkKLbs7EWPcnbWKp2rtxZVObySRxhz8NfuQOES5zfvrHLtA==}
     requiresBuild: true
     dependencies:
-      '@am92/jose-crypto': 1.0.11
-      '@am92/kms': 1.0.11
-      '@am92/redis': 1.0.11
+      '@am92/jose-crypto': 1.0.13
+      '@am92/kms': 1.0.13
+      '@am92/redis': 1.0.13
       moment: 2.29.4
     transitivePeerDependencies:
       - aws-crt
     dev: false
 
-  /@am92/jose-crypto/1.0.11:
-    resolution: {integrity: sha512-sVl4ieZ24qDT/L93TolqqTZb5qUL2/RJkbIyd46x96K0OS+DejrWNWe4l8PZ8k++e9fUGho5K76DXDFkUOQp1w==}
+  /@am92/jose-crypto/1.0.13:
+    resolution: {integrity: sha512-0aIG3Zzub4NXdDZ/LJbUbs/iXV/+FGFElBBRSFtcblrQ13WBee3oq1tM/beD/6AK7kEJDobNNQNPcmu23WPIew==}
     dev: false
 
-  /@am92/kms/1.0.11:
-    resolution: {integrity: sha512-dZ1f6rby6aevXYnFk8lP0zsxj71W3u/oHn9hgFmj2EA+keUgR5apjUV0y8TpGVSMAM88arz2Ru2x6Tb3v3kyvw==}
+  /@am92/kms/1.0.13:
+    resolution: {integrity: sha512-ekRDsuOOuk6nJ8QXCgp/rNb7pKrjcxKNY9Z7t9B/eS+4BLLUrrbgTTtDNfkw5o7uBIPQgK1mw6EBTsBaymYZLQ==}
     dependencies:
       '@aws-sdk/client-kms': 3.272.0
     transitivePeerDependencies:
       - aws-crt
     dev: false
 
-  /@am92/redis/1.0.11:
-    resolution: {integrity: sha512-BKyykTAelr5dgT2thlgFr4JGo2LlizvkyCobC+KlckhqrsaH1Ap3DOuorDrJGv1DNY3ETjetMHyw2u3tvj3aSQ==}
+  /@am92/redis/1.0.13:
+    resolution: {integrity: sha512-XIXvCCJJLSBvr4PGOR2BHhztPtXLshBtV1gT+ax57PQUJa4seHdbc4XZVbkJel6R5RkTTHuEop4k1oDr6XUE6g==}
     dependencies:
       redis: 4.6.4
     dev: false
