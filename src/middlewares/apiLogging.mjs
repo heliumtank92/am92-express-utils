@@ -50,14 +50,14 @@ function _buildLogMeta (req, res) {
       ipAddress: requestIp,
       url: requestUrl,
       method,
-      headers: reqHeaders,
+      headers: { ...reqHeaders },
       body: reqBody
     },
 
     res: {
       statusCode,
       status,
-      headers: resHeaders,
+      headers: { ...resHeaders },
       body: resBody,
       responseMessage,
       responseTime
