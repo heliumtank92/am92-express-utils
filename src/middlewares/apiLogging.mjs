@@ -73,8 +73,8 @@ function _getLogFunc (statusCode) {
   }
 
   if (statusCode >= 300 && statusCode < 400) {
-    return console.info
+    return console.httpInfo || console.info
   }
 
-  return console.error
+  return console.httpError || console.error
 }
