@@ -37,7 +37,7 @@
     "./CONSTANTS": "./src/CONSTANTS.mjs"
   },
   "dependencies": {
-    "@am92/api-crypto": "^1.0.14",
+    "@am92/api-crypto": "^1.0.17",
     "express-http-context": "^1.2.4",
     "lodash": "^4.17.21",
     "nanoid": "^4.0.1"

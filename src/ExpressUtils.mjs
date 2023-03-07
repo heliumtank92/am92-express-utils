@@ -1,5 +1,4 @@
 import ApiCrypto from '@am92/api-crypto'
-import logger from '@am92/api-logger'
 import { SERVICE } from './CONFIG.mjs'
 
 import configureApp from './lib/configureApp.mjs'
@@ -27,7 +26,7 @@ export {
 }
 
 async function initialize (customValidateClient) {
-  logger.trace(`[${SERVICE} ExpressUtils] Initialising...`)
+  console.trace(`[${SERVICE} ExpressUtils] Initialising...`)
   await ApiCrypto.initialize(customValidateClient)
-  logger.info(`[${SERVICE} ExpressUtils] Initialised`)
+  console.info(`[${SERVICE} ExpressUtils] Initialised`)
 }
