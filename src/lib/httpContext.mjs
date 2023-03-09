@@ -1,10 +1,5 @@
 import expressHttpContext from 'express-http-context'
-import {
-  REQUEST_ID_HEADER_KEY,
-  SESSION_ID_HEADER_KEY,
-  CLIENT_ID_HEADER_KEY,
-  ENCRYPTION_KEY_HEADER_KEY
-} from '../CONSTANTS.mjs'
+import EXPS_CONST from '../EXPS_CONST.mjs'
 
 const httpContext = {
   get: expressHttpContext.get,
@@ -22,33 +17,33 @@ const httpContext = {
 export default httpContext
 
 function getRequestId () {
-  return expressHttpContext.get(`headers.${REQUEST_ID_HEADER_KEY}`)
+  return expressHttpContext.get(`headers.${EXPS_CONST.REQUEST_ID_HEADER_KEY}`)
 }
 
 function setRequestId (requestId) {
-  return expressHttpContext.set(`headers.${REQUEST_ID_HEADER_KEY}`, requestId)
+  return expressHttpContext.set(`headers.${EXPS_CONST.REQUEST_ID_HEADER_KEY}`, requestId)
 }
 
 function getSessionId () {
-  return expressHttpContext.get(`headers.${SESSION_ID_HEADER_KEY}`)
+  return expressHttpContext.get(`headers.${EXPS_CONST.SESSION_ID_HEADER_KEY}`)
 }
 
 function setSessionId (sessionId) {
-  return expressHttpContext.set(`headers.${SESSION_ID_HEADER_KEY}`, sessionId)
+  return expressHttpContext.set(`headers.${EXPS_CONST.SESSION_ID_HEADER_KEY}`, sessionId)
 }
 
 function getClientId () {
-  return expressHttpContext.get(`headers.${CLIENT_ID_HEADER_KEY}`)
+  return expressHttpContext.get(`headers.${EXPS_CONST.CLIENT_ID_HEADER_KEY}`)
 }
 
 function setClientId (clientId) {
-  return expressHttpContext.set(`headers.${CLIENT_ID_HEADER_KEY}`, clientId)
+  return expressHttpContext.set(`headers.${EXPS_CONST.CLIENT_ID_HEADER_KEY}`, clientId)
 }
 
 function getEncryptionKey () {
-  return expressHttpContext.get(`headers.${ENCRYPTION_KEY_HEADER_KEY}`)
+  return expressHttpContext.get(`headers.${EXPS_CONST.ENCRYPTION_KEY_HEADER_KEY}`)
 }
 
 function setEncryptionKey (encryptionKey) {
-  return expressHttpContext.set(`headers.${ENCRYPTION_KEY_HEADER_KEY}`, encryptionKey)
+  return expressHttpContext.set(`headers.${EXPS_CONST.ENCRYPTION_KEY_HEADER_KEY}`, encryptionKey)
 }

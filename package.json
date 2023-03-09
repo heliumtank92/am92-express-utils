@@ -1,15 +1,30 @@
 {
   "name": "@am92/express-utils",
-  "version": "1.0.18",
+  "version": "1.1.0",
   "description": "Utilities for Express Framework",
   "type": "module",
-  "main": "src/ExpressUtils.mjs",
-  "module": "src/ExpressUtils.mjs",
+  "exports": {
+    ".": {
+      "types": "./types/index.d.mts",
+      "import": "./src/index.mjs"
+    }
+  },
+  "types": "./types/index.d.mts",
+  "module": "./src/index.mjs",
+  "main": "./src/index.mjs",
+  "dependencies": {
+    "@am92/api-crypto": "^1.1.1",
+    "express-http-context": "^1.2.4",
+    "lodash": "^4.17.21",
+    "nanoid": "^4.0.1"
+  },
   "scripts": {
     "test": "echo 'Error: no test specified'",
+    "generate:types": "rm -rf types && npx -p typescript tsc",
     "preversion": "pnpm test",
     "version": "echo 'Versioning'",
-    "postversion": "git push && git push --tags"
+    "postversion": "git push && git push --tags && npm run publish:pkg",
+    "publish:pkg": "npm publish"
   },
   "repository": "git@github.com:heliumtank92/am92-express-utils.git",
   "homepage": "https://github.com/heliumtank92/am92-express-utils#readme",
@@ -26,21 +41,8 @@
     }
   ],
   "license": "MIT",
-  "exports": {
-    ".": "./src/ExpressUtils.mjs",
-    "./asyncWrapper": "./src/lib/asyncWrapper.mjs",
-    "./configureRouter": "./src/lib/configureRouter.mjs",
-    "./httpContext": "./src/lib/httpContext.mjs",
-    "./configureApp": "./src/lib/configureApp.mjs",
-    "./CustomError": "./src/classes/CustomError.mjs",
-    "./ResponseBody": "./src/classes/ResponseBody.mjs",
-    "./CONSTANTS": "./src/CONSTANTS.mjs"
-  },
-  "dependencies": {
-    "@am92/api-crypto": "^1.0.11",
-    "express-http-context": "^1.2.4",
-    "lodash": "^4.17.21",
-    "nanoid": "^4.0.0"
+  "publishConfig": {
+    "access": "public"
   },
   "keywords": [
     "express",
