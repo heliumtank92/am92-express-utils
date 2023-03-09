@@ -1,4 +1,3 @@
-import logger from '@am92/api-logger'
 import expressHttpContext from 'express-http-context'
 
 import apiLogging from '../middlewares/apiLogging.mjs'
@@ -10,10 +9,10 @@ import DEFAULT_ROUTES from '../middlewares/DEFAULT_ROUTES.mjs'
 
 import { SERVICE } from '../CONFIG.mjs'
 
-export default function configureApp (app, Routes) {
+export default function configureApp (app, Routes = []) {
   if (!app || !app.use) {
-    logger.error(`[${SERVICE} ExpressUtils] Route Initialization Failed: app / app.use is undefined`)
-    return process.exit(1)
+    console.error(`[${SERVICE} ExpressUtils] Configuring App Failed: app / app.use is undefined`)
+    process.exit(1)
   }
 
   // Initial Route Pipeline

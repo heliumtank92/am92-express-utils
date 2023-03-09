@@ -1,45 +1,45 @@
 lockfileVersion: 5.4
 
 specifiers:
-  '@am92/api-crypto': ^1.0.17
+  '@am92/api-crypto': ^1.1.1
   express-http-context: ^1.2.4
   lodash: ^4.17.21
   nanoid: ^4.0.1
 
 dependencies:
-  '@am92/api-crypto': 1.0.17
+  '@am92/api-crypto': 1.1.1
   express-http-context: 1.2.4
   lodash: 4.17.21
   nanoid: 4.0.1
 
 packages:
 
-  /@am92/api-crypto/1.0.17:
-    resolution: {integrity: sha512-C87WhqxorppnMBWsjxRfyCt0pUweePC6nuljo7FqPCa0p0KFMgeHNb+HmmgHQ2mVi/kh6eSIj0P26pKQK1J6nA==}
+  /@am92/api-crypto/1.1.1:
+    resolution: {integrity: sha512-FRjT5j+U8PC03NpfJuO5jQZozgYMouoZ5AifNjmw6zR/+1cLe9p5bMpuSiZxpq415NXk/s1vpdFboPL4QEgHSA==}
     requiresBuild: true
     dependencies:
-      '@am92/jose-crypto': 1.0.15
-      '@am92/kms': 1.0.15
-      '@am92/redis': 1.0.15
+      '@am92/jose-crypto': 1.1.1
+      '@am92/kms': 1.1.1
+      '@am92/redis': 1.1.0
       moment: 2.29.4
     transitivePeerDependencies:
       - aws-crt
     dev: false
 
-  /@am92/jose-crypto/1.0.15:
-    resolution: {integrity: sha512-Fdru1pIPa14rd2TqMRCzvg3p+Zm+S9kQ5b956ph1V+8Hbh/1lk58AUD480f4ad+wxQDBLTjyffin+mlUS7urAg==}
+  /@am92/jose-crypto/1.1.1:
+    resolution: {integrity: sha512-zVgSvKEjJVaL6muxwLaDzlwrfgg9h6l5pt1ELwILecGbU4uvoXg0BKhwUyYJuAc2l83y2jcOh32qb2MGv1epjQ==}
     dev: false
 
-  /@am92/kms/1.0.15:
-    resolution: {integrity: sha512-Ve3hpFlBIZ+HUFOaYu8p1hEShfe2bY6TKIiQ4fMkMPwudxqXTUvaZZY97D/78iutRYAwqxsjPM57OpFZnWbL5A==}
+  /@am92/kms/1.1.1:
+    resolution: {integrity: sha512-zUoSGzZMncjtyfgev2hI4VslAqXCWbZJ9iwf81AHjbj4g+FNDI5XY9OnUQukwLbaQV4s772sVdSugipUwQdZPQ==}
     dependencies:
       '@aws-sdk/client-kms': 3.282.0
     transitivePeerDependencies:
       - aws-crt
     dev: false
 
-  /@am92/redis/1.0.15:
-    resolution: {integrity: sha512-9yWMvc0w+0j5P/am1DBGWIXQmnJms6r7iYIIF31vG8HDv2hL5e+DR3Yye/muoUd3yn9rN+KoRosCc6+0ZHOw3A==}
+  /@am92/redis/1.1.0:
+    resolution: {integrity: sha512-71xQugHLhOwIfVAI+u+izs0J4aMueTwt3ImGrRISzRm6HiwrKSZNGDrBNLvvolYKIxqsPs59QWIFDTmXMACNnQ==}
     dependencies:
       redis: 4.6.5
     dev: false

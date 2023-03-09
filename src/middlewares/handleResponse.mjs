@@ -1,6 +1,6 @@
 import httpContext from '../lib/httpContext.mjs'
 import ResponseBody from '../classes/ResponseBody.mjs'
-import { REQUEST_ID_HEADER_KEY, SESSION_ID_HEADER_KEY } from '../CONSTANTS.mjs'
+import EXPS_CONST from '../EXPS_CONST.mjs'
 
 export default function handleExpressResponse (request, response, next) {
   // Set Headers
@@ -20,11 +20,15 @@ function _setHeaders (request, response) {
 
   const currentExposeHeaders = response.get('Access-Control-Expose-Headers')
   const currentExposeHeadersArray = (currentExposeHeaders && currentExposeHeaders.split(',')) || []
-  const newExposeHeaders = [...currentExposeHeadersArray, REQUEST_ID_HEADER_KEY, SESSION_ID_HEADER_KEY].join()
+  const newExposeHeaders = [
+    ...currentExposeHeadersArray,
+    EXPS_CONST.REQUEST_ID_HEADER_KEY,
+    EXPS_CONST.SESSION_ID_HEADER_KEY
+  ].join()
 
   // Set Response Headers
-  response.set(REQUEST_ID_HEADER_KEY, requestId)
-  response.set(SESSION_ID_HEADER_KEY, sessionId)
+  response.set(EXPS_CONST.REQUEST_ID_HEADER_KEY, requestId)
+  response.set(EXPS_CONST.SESSION_ID_HEADER_KEY, sessionId)
   response.set('Access-Control-Expose-Headers', newExposeHeaders)
 }
 
