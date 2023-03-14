@@ -1,3 +1,4 @@
+import { API_LOGGER_TRACKING_ID, namespace } from '@am92/api-logger'
 import httpContext from '../lib/httpContext.mjs'
 
 export default function apiLogging (request, response, next) {
@@ -9,7 +10,7 @@ export default function apiLogging (request, response, next) {
     logFunc(logMeta)
   })
 
-  process.nextTick(next)
+  namespace.run(() => _setTrackingId(next))
 }
 
 function _buildLogMeta (req, res) {
@@ -77,4 +78,15 @@ function _getLogFunc (statusCode) {
   }
 
   return console.httpError || console.error
+}
+
+function _setTrackingId (next) {
+  if (namespace.active) {
+    const sessionId = httpContext.getSessionId()
+    const requestId = httpContext.getRequestId()
+    const trackingId = `${sessionId}.${requestId}`
+    namespace.set(API_LOGGER_TRACKING_ID, trackingId)
+  }
+
+  process.nextTick(next)
 }

@@ -16,9 +16,9 @@ export default function configureApp (app, Routes = []) {
   }
 
   // Initial Route Pipeline
-  app.use('*', apiLogging)
   app.use('*', expressHttpContext.middleware)
   app.use('*', extractHeaders)
+  app.use('*', apiLogging)
 
   // Default Routes
   DEFAULT_ROUTES.forEach(route => app[route.method](route.path, ...route.routePipeline))
