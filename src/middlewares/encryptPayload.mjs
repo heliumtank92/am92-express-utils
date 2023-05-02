@@ -7,8 +7,7 @@ export default function encryptPayload (request, response, next) {
   const plaintextKey = httpContext.getEncryptionKey()
 
   if (body && plaintextKey) {
-    const bodyString = JSON.stringify(body)
-    const encryptedPayload = ApiCrypto.encryptData(bodyString, plaintextKey)
+    const encryptedPayload = ApiCrypto.encryptData(body, plaintextKey)
     const data = { payload: encryptedPayload }
     response.encryptedBody = new ResponseBody(200, 'Success', data)
   }

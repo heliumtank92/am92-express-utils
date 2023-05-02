@@ -9,8 +9,8 @@ export default function decryptPayload (request, response, next) {
 
   if (plaintextKey) {
     if (payload) {
-      const plaintextPayload = ApiCrypto.decryptData(payload, plaintextKey)
-      request.body = JSON.parse(plaintextPayload)
+      const decryptedBody = ApiCrypto.decryptData(payload, plaintextKey)
+      request.body = decryptedBody
     } else {
       request.body = {}
     }

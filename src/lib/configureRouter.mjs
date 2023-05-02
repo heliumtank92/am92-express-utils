@@ -6,6 +6,7 @@ import decryptPayload from '../middlewares/decryptPayload.mjs'
 import encryptPayload from '../middlewares/encryptPayload.mjs'
 import routeSanity from '../middlewares/routeSanity.mjs'
 import asyncWrapper from './asyncWrapper.mjs'
+import { logManager } from '../middlewares/apiLogging.mjs'
 
 import { SERVICE } from '../CONFIG.mjs'
 
@@ -45,7 +46,8 @@ function buildRoutes (Router, config) {
       postPipeline = [],
 
       enabled = false,
-      disableCrypto = false
+      disableCrypto = false,
+      disableBodyLog = false
     } = routeConfig || {}
 
     // Handle Missing 'path' or 'method'
@@ -72,6 +74,7 @@ function buildRoutes (Router, config) {
     Router[method](
       path,
       routeSanity,
+      logManager(disableBodyLog),
       ..._.map(prePipeline, asyncWrapper),
       ..._.map(preCryptoPipeline, asyncWrapper),
       ..._.map(pipeline, asyncWrapper),
