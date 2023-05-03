@@ -13,6 +13,13 @@ export default function apiLogging (request, response, next) {
   namespace.run(() => _setTrackingId(next))
 }
 
+export function logManager (disableBodyLog) {
+  return function (request, response, next) {
+    request.disableBodyLog = disableBodyLog
+    process.nextTick(next)
+  }
+}
+
 function _buildLogMeta (req, res) {
   const {
     httpVersionMajor,
@@ -21,7 +28,8 @@ function _buildLogMeta (req, res) {
     url,
     method,
     headers: reqHeaders,
-    body: reqBody = {}
+    body: reqBody = {},
+    disableBodyLog
   } = req
 
   const httpVersion = `${httpVersionMajor}.${httpVersionMinor}`
@@ -52,14 +60,14 @@ function _buildLogMeta (req, res) {
       url: requestUrl,
       method,
       headers: { ...reqHeaders },
-      body: reqBody
+      body: disableBodyLog ? null : reqBody
     },
 
     res: {
       statusCode,
       status,
       headers: { ...resHeaders },
-      body: resBody,
+      body: disableBodyLog ? null : resBody,
       responseMessage,
       responseTime
     }
