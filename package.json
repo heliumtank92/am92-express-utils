@@ -13,7 +13,7 @@
   "module": "./src/index.mjs",
   "main": "./src/index.mjs",
   "dependencies": {
-    "@am92/api-crypto": "^1.1.2",
+    "@am92/api-crypto": "^1.1.3",
     "@am92/api-logger": "^1.1.5",
     "express-http-context": "^1.2.4",
     "lodash": "^4.17.21",

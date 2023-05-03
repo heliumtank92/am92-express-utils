@@ -2,8 +2,8 @@ lockfileVersion: '6.0'
 
 dependencies:
   '@am92/api-crypto':
-    specifier: ^1.1.2
-    version: 1.1.2
+    specifier: ^1.1.3
+    version: 1.1.3
   '@am92/api-logger':
     specifier: ^1.1.5
     version: 1.1.5
@@ -19,13 +19,12 @@ dependencies:
 
 packages:
 
-  /@am92/api-crypto@1.1.2:
-    resolution: {integrity: sha512-OV3VhAtUBP2PLX9Vm5cJscAp2grohlVBDcpOtklhwAmk0PV+qbNgve/utHDI9aaHRP0ylblTZ5EHLVzFMPejxw==}
-    requiresBuild: true
+  /@am92/api-crypto@1.1.3:
+    resolution: {integrity: sha512-n7nQINPgGqOSSoOC+EjvC5rBkCPBYvB69TvMbgZiUiHIqUBHgo1XRVtlsshacWIQnuJN1LV8FacTPtimc9o+dg==}
     dependencies:
       '@am92/jose-crypto': 1.1.1
       '@am92/kms': 1.1.1
-      '@am92/redis': 1.1.1
+      '@am92/redis': 1.1.2
       moment: 2.29.4
     transitivePeerDependencies:
       - aws-crt
@@ -52,8 +51,8 @@ packages:
       - aws-crt
     dev: false
 
-  /@am92/redis@1.1.1:
-    resolution: {integrity: sha512-2RmzqPipCEga4xg6PU3qC/QeHmo1cFzkNuyHu/zDfax8yb+JPj1PAvPbmJjwhZ+f6W3W8rkSrWx5BWW/w5fbrg==}
+  /@am92/redis@1.1.2:
+    resolution: {integrity: sha512-+ztLp4B+36wETZ0esltWATA5iSkDfrQJoLBS3UDqOgRjgfKRXxh18YPpAlEiO465ngxWIVGLaokk/cS9BSpYag==}
     dependencies:
       redis: 4.6.5
     dev: false
