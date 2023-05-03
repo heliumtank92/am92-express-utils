@@ -1,6 +1,6 @@
 {
   "name": "@am92/express-utils",
-  "version": "1.1.3",
+  "version": "1.1.4",
   "description": "Utilities for Express Framework",
   "type": "module",
   "exports": {
