@@ -4,4 +4,5 @@ declare namespace EXPS_CONST {
     const SESSION_ID_HEADER_KEY: string;
     const CLIENT_ID_HEADER_KEY: string;
     const ENCRYPTION_KEY_HEADER_KEY: string;
+    const PLAINTEXT_ENCRYPTION_KEY: string;
 }
