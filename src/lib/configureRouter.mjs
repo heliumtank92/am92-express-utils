@@ -7,16 +7,14 @@ import encryptPayload from '../middlewares/encryptPayload.mjs'
 import routeSanity from '../middlewares/routeSanity.mjs'
 import asyncWrapper from './asyncWrapper.mjs'
 import { logManager } from '../middlewares/apiLogging.mjs'
+import handleResponse from '../middlewares/handleResponse.mjs'
 
 import { SERVICE } from '../CONFIG.mjs'
 
-export default function configureRouter (Router, masterConfig, customConfig) {
+export default function configureRouter(Router, masterConfig, customConfig) {
   const config = _.merge(masterConfig, customConfig)
 
-  const {
-    preMiddlewares = [],
-    postMiddlewares = []
-  } = config
+  const { preMiddlewares = [], postMiddlewares = [] } = config
 
   // Pre-route Middlewares
   preMiddlewares.forEach(middleware => Router.use(asyncWrapper(middleware)))
@@ -30,7 +28,7 @@ export default function configureRouter (Router, masterConfig, customConfig) {
   return Router
 }
 
-function buildRoutes (Router, config) {
+function buildRoutes(Router, config) {
   const { routerName, routesConfig } = config
   const routes = _.keys(routesConfig)
   const disabledRouted = []
@@ -52,7 +50,9 @@ function buildRoutes (Router, config) {
 
     // Handle Missing 'path' or 'method'
     if (!path || !method) {
-      logger.error(`[${SERVICE} ExpressUtils] Unable to Configure Route for Router '${routerName}': ${route}`)
+      logger.error(
+        `[${SERVICE} ExpressUtils] Unable to Configure Route for Router '${routerName}': ${route}`
+      )
       return
     }
 
@@ -79,11 +79,18 @@ function buildRoutes (Router, config) {
       ..._.map(preCryptoPipeline, asyncWrapper),
       ..._.map(pipeline, asyncWrapper),
       ..._.map(postCryptoPipeline, asyncWrapper),
-      ..._.map(postPipeline, asyncWrapper)
+      ..._.map(postPipeline, asyncWrapper),
+
+      // Final Route Pipeline
+      asyncWrapper(handleResponse)
     )
   })
 
   if (disabledRouted.length) {
-    logger.warn(`[${SERVICE} ExpressUtils] Disabled Routes for Router '${routerName}': ${disabledRouted.join(', ')}`)
+    logger.warn(
+      `[${SERVICE} ExpressUtils] Disabled Routes for Router '${routerName}': ${disabledRouted.join(
+        ', '
+      )}`
+    )
   }
 }
