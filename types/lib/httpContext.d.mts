@@ -10,6 +10,8 @@ declare namespace httpContext {
     export { setClientId };
     export { getEncryptionKey };
     export { setEncryptionKey };
+    export { getPlaintextEncryptionKey };
+    export { setPlaintextEncryptionKey };
 }
 import expressHttpContext from "express-http-context";
 declare function getRequestId(): any;
@@ -20,3 +22,5 @@ declare function getClientId(): any;
 declare function setClientId(clientId: any): void;
 declare function getEncryptionKey(): any;
 declare function setEncryptionKey(encryptionKey: any): void;
+declare function getPlaintextEncryptionKey(): any;
+declare function setPlaintextEncryptionKey(encryptionKey: any): void;

@@ -1,11 +1,11 @@
 import ApiCrypto from '@am92/api-crypto'
 import httpContext from '../lib/httpContext.mjs'
 
-export default function decryptPayload (request, response, next) {
+export default function decryptPayload(request, response, next) {
   const { body = {} } = request
   const { payload = '' } = body
 
-  const plaintextKey = httpContext.getEncryptionKey()
+  const plaintextKey = httpContext.getPlaintextEncryptionKey()
 
   if (plaintextKey) {
     if (payload) {

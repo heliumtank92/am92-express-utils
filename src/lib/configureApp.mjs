@@ -9,9 +9,11 @@ import DEFAULT_ROUTES from '../middlewares/DEFAULT_ROUTES.mjs'
 
 import { SERVICE } from '../CONFIG.mjs'
 
-export default function configureApp (app, Routes = []) {
+export default function configureApp(app, Routes = []) {
   if (!app || !app.use) {
-    console.error(`[${SERVICE} ExpressUtils] Configuring App Failed: app / app.use is undefined`)
+    console.error(
+      `[${SERVICE} ExpressUtils] Configuring App Failed: app / app.use is undefined`
+    )
     process.exit(1)
   }
 
@@ -21,7 +23,9 @@ export default function configureApp (app, Routes = []) {
   app.use('*', apiLogging)
 
   // Default Routes
-  DEFAULT_ROUTES.forEach(route => app[route.method](route.path, ...route.routePipeline))
+  DEFAULT_ROUTES.forEach(route =>
+    app[route.method](route.path, ...route.routePipeline)
+  )
 
   // Custom Routes
   Routes.forEach(route => app.use(route.path, route.router))

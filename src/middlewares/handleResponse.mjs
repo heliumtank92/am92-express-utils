@@ -2,24 +2,26 @@ import httpContext from '../lib/httpContext.mjs'
 import ResponseBody from '../classes/ResponseBody.mjs'
 import EXPS_CONST from '../EXPS_CONST.mjs'
 
-export default function handleExpressResponse (request, response, next) {
+export default function handleResponse(request, response, next) {
   // Set Headers
   _setHeaders(request, response)
 
   // Handle Response for Error / No Route / Response
-  const responseHandler = (response.isError || request.isMatch)
-    ? _handleDataResponse
-    : _handleNoRouteResponse
+  const responseHandler =
+    response.isError || request.isMatch
+      ? _handleDataResponse
+      : _handleNoRouteResponse
 
   responseHandler(request, response, next)
 }
 
-function _setHeaders (request, response) {
+function _setHeaders(request, response) {
   const requestId = httpContext.getRequestId()
   const sessionId = httpContext.getSessionId()
 
   const currentExposeHeaders = response.get('Access-Control-Expose-Headers')
-  const currentExposeHeadersArray = (currentExposeHeaders && currentExposeHeaders.split(',')) || []
+  const currentExposeHeadersArray =
+    (currentExposeHeaders && currentExposeHeaders.split(',')) || []
   const newExposeHeaders = [
     ...currentExposeHeadersArray,
     EXPS_CONST.REQUEST_ID_HEADER_KEY,
@@ -32,7 +34,7 @@ function _setHeaders (request, response) {
   response.set('Access-Control-Expose-Headers', newExposeHeaders)
 }
 
-function _handleNoRouteResponse (request, response, next) {
+function _handleNoRouteResponse(request, response, next) {
   const { method, originalUrl } = request
   const message = `Cannot ${method} ${originalUrl}`
   const resBody = new ResponseBody(404, message)
@@ -40,16 +42,17 @@ function _handleNoRouteResponse (request, response, next) {
   response.status(resBody.statusCode).json(resBody)
 }
 
-function _handleDataResponse (request, response, next) {
+function _handleDataResponse(request, response, next) {
   const resBody = response.encryptedBody || response.body || {}
-  const handler = ([301, 302].indexOf(resBody.statusCode) > -1)
-    ? _redirectResponse
-    : _sendResponse
+  const handler =
+    [301, 302].indexOf(resBody.statusCode) > -1
+      ? _redirectResponse
+      : _sendResponse
 
   handler(request, response, next)
 }
 
-function _sendResponse (request, response, next) {
+function _sendResponse(request, response, next) {
   let resBody = response.encryptedBody || response.body || {}
 
   if (!resBody.statusCode) {
@@ -59,7 +62,7 @@ function _sendResponse (request, response, next) {
   response.status(resBody.statusCode).json(resBody)
 }
 
-function _redirectResponse (request, response, next) {
+function _redirectResponse(request, response, next) {
   const resBody = response.encryptedBody || response.body || {}
   const { statusCode, data } = resBody
   response.status(statusCode).redirect(data)

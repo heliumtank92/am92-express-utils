@@ -3,7 +3,6 @@ export default class CustomError extends Error {
     _isCustomError: boolean;
     service: string;
     message: any;
-    errorMessage: any;
     statusCode: any;
     errorCode: any;
     error: {};

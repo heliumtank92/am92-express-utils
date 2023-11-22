@@ -11,39 +11,66 @@ const httpContext = {
   getClientId,
   setClientId,
   getEncryptionKey,
-  setEncryptionKey
+  setEncryptionKey,
+  getPlaintextEncryptionKey,
+  setPlaintextEncryptionKey
 }
 
 export default httpContext
 
-function getRequestId () {
+function getRequestId() {
   return expressHttpContext.get(`headers.${EXPS_CONST.REQUEST_ID_HEADER_KEY}`)
 }
 
-function setRequestId (requestId) {
-  return expressHttpContext.set(`headers.${EXPS_CONST.REQUEST_ID_HEADER_KEY}`, requestId)
+function setRequestId(requestId) {
+  return expressHttpContext.set(
+    `headers.${EXPS_CONST.REQUEST_ID_HEADER_KEY}`,
+    requestId
+  )
 }
 
-function getSessionId () {
+function getSessionId() {
   return expressHttpContext.get(`headers.${EXPS_CONST.SESSION_ID_HEADER_KEY}`)
 }
 
-function setSessionId (sessionId) {
-  return expressHttpContext.set(`headers.${EXPS_CONST.SESSION_ID_HEADER_KEY}`, sessionId)
+function setSessionId(sessionId) {
+  return expressHttpContext.set(
+    `headers.${EXPS_CONST.SESSION_ID_HEADER_KEY}`,
+    sessionId
+  )
 }
 
-function getClientId () {
+function getClientId() {
   return expressHttpContext.get(`headers.${EXPS_CONST.CLIENT_ID_HEADER_KEY}`)
 }
 
-function setClientId (clientId) {
-  return expressHttpContext.set(`headers.${EXPS_CONST.CLIENT_ID_HEADER_KEY}`, clientId)
+function setClientId(clientId) {
+  return expressHttpContext.set(
+    `headers.${EXPS_CONST.CLIENT_ID_HEADER_KEY}`,
+    clientId
+  )
 }
 
-function getEncryptionKey () {
-  return expressHttpContext.get(`headers.${EXPS_CONST.ENCRYPTION_KEY_HEADER_KEY}`)
+function getEncryptionKey() {
+  return expressHttpContext.get(
+    `headers.${EXPS_CONST.ENCRYPTION_KEY_HEADER_KEY}`
+  )
 }
 
-function setEncryptionKey (encryptionKey) {
-  return expressHttpContext.set(`headers.${EXPS_CONST.ENCRYPTION_KEY_HEADER_KEY}`, encryptionKey)
+function setEncryptionKey(encryptionKey) {
+  return expressHttpContext.set(
+    `headers.${EXPS_CONST.ENCRYPTION_KEY_HEADER_KEY}`,
+    encryptionKey
+  )
+}
+
+function getPlaintextEncryptionKey() {
+  return expressHttpContext.get(EXPS_CONST.ENCRYPTION_KEY_HEADER_KEY)
+}
+
+function setPlaintextEncryptionKey(encryptionKey) {
+  return expressHttpContext.set(
+    EXPS_CONST.ENCRYPTION_KEY_HEADER_KEY,
+    encryptionKey
+  )
 }
