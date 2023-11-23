@@ -14,22 +14,19 @@ import { SERVICE } from '../CONFIG.mjs'
 export default function configureRouter(Router, masterConfig, customConfig) {
   const config = _.merge(masterConfig, customConfig)
 
-  const { preMiddlewares = [], postMiddlewares = [] } = config
-
-  // Pre-route Middlewares
-  preMiddlewares.forEach(middleware => Router.use(asyncWrapper(middleware)))
-
   // Resource Route Building
   buildRoutes(Router, config)
-
-  // Post-route Middlewares
-  postMiddlewares.forEach(middleware => Router.use(asyncWrapper(middleware)))
 
   return Router
 }
 
 function buildRoutes(Router, config) {
-  const { routerName, routesConfig } = config
+  const {
+    routerName,
+    routesConfig,
+    preMiddlewares = [],
+    postMiddlewares = []
+  } = config
   const routes = _.keys(routesConfig)
   const disabledRouted = []
 
@@ -75,13 +72,13 @@ function buildRoutes(Router, config) {
       path,
       routeSanity,
       logManager(disableBodyLog),
+      ..._.map(preMiddlewares, asyncWrapper),
       ..._.map(prePipeline, asyncWrapper),
       ..._.map(preCryptoPipeline, asyncWrapper),
       ..._.map(pipeline, asyncWrapper),
       ..._.map(postCryptoPipeline, asyncWrapper),
       ..._.map(postPipeline, asyncWrapper),
-
-      // Final Route Pipeline
+      ..._.map(postMiddlewares, asyncWrapper),
       asyncWrapper(handleResponse)
     )
   })
