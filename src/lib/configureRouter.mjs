@@ -68,7 +68,7 @@ function buildRoutes(Router, config) {
     }
 
     // Configure Respective Pipelines
-    Router[method](
+    Router[method.toLowerCase()](
       path,
       routeSanity,
       logManager(disableBodyLog),
