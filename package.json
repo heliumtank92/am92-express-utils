@@ -1,6 +1,6 @@
 {
   "name": "@am92/express-utils",
-  "version": "1.1.14",
+  "version": "2.0.0",
   "description": "Utilities for Express Framework",
   "sideEffects": false,
   "types": "dist/index.d.ts",
