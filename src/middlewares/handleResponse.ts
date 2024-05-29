@@ -1,8 +1,25 @@
-import httpContext from '../lib/httpContext.mjs'
-import ResponseBody from '../classes/ResponseBody.mjs'
-import EXPS_CONST from '../EXPS_CONST.mjs'
+import { Request, Response, NextFunction } from 'express'
+import httpContext from '../lib/httpContext'
+import ResponseBody from '../classes/ResponseBody'
+import CONSTANTS from '../CONSTANTS'
 
-export default function handleResponse(request, response, next) {
+/**
+ * Middleware to handle the response for the request.
+ *
+ * This middleware function sets the necessary headers and determines the appropriate response handler
+ * based on whether the response is an error or if the request matches a route. It then invokes the
+ * selected response handler to process the response.
+ *
+ * @export
+ * @param {Request} request - The Express request object.
+ * @param {Response} response - The Express response object.
+ * @param {NextFunction} next - The next middleware function in the stack.
+ */
+export default function handleResponse(
+  request: Request,
+  response: Response,
+  next: NextFunction
+): void {
   // Set Headers
   _setHeaders(request, response)
 
@@ -15,7 +32,8 @@ export default function handleResponse(request, response, next) {
   responseHandler(request, response, next)
 }
 
-function _setHeaders(request, response) {
+/** @ignore */
+function _setHeaders(request: Request, response: Response) {
   const requestId = httpContext.getRequestId()
   const sessionId = httpContext.getSessionId()
 
@@ -24,17 +42,22 @@ function _setHeaders(request, response) {
     (currentExposeHeaders && currentExposeHeaders.split(',')) || []
   const newExposeHeaders = [
     ...currentExposeHeadersArray,
-    EXPS_CONST.REQUEST_ID_HEADER_KEY,
-    EXPS_CONST.SESSION_ID_HEADER_KEY
+    CONSTANTS.REQUEST_ID_HEADER_KEY,
+    CONSTANTS.SESSION_ID_HEADER_KEY
   ].join()
 
   // Set Response Headers
-  response.set(EXPS_CONST.REQUEST_ID_HEADER_KEY, requestId)
-  response.set(EXPS_CONST.SESSION_ID_HEADER_KEY, sessionId)
+  response.set(CONSTANTS.REQUEST_ID_HEADER_KEY, requestId)
+  response.set(CONSTANTS.SESSION_ID_HEADER_KEY, sessionId)
   response.set('Access-Control-Expose-Headers', newExposeHeaders)
 }
 
-function _handleNoRouteResponse(request, response, next) {
+/** @ignore */
+function _handleNoRouteResponse(
+  request: Request,
+  response: Response,
+  next: NextFunction
+) {
   const { method, originalUrl } = request
   const message = `Cannot ${method} ${originalUrl}`
   const resBody = new ResponseBody(404, message)
@@ -42,7 +65,12 @@ function _handleNoRouteResponse(request, response, next) {
   response.status(resBody.statusCode).json(resBody)
 }
 
-function _handleDataResponse(request, response, next) {
+/** @ignore */
+function _handleDataResponse(
+  request: Request,
+  response: Response,
+  next: NextFunction
+) {
   const resBody = response.encryptedBody || response.body || {}
   const handler =
     [301, 302].indexOf(resBody.statusCode) > -1
@@ -52,7 +80,8 @@ function _handleDataResponse(request, response, next) {
   handler(request, response, next)
 }
 
-function _sendResponse(request, response, next) {
+/** @ignore */
+function _sendResponse(request: Request, response: Response) {
   let resBody = response.encryptedBody || response.body || {}
 
   if (!resBody.statusCode) {
@@ -62,7 +91,12 @@ function _sendResponse(request, response, next) {
   response.status(resBody.statusCode).json(resBody)
 }
 
-function _redirectResponse(request, response, next) {
+/** @ignore */
+function _redirectResponse(
+  request: Request,
+  response: Response,
+  next: NextFunction
+) {
   const resBody = response.encryptedBody || response.body || {}
   const { statusCode, data } = resBody
   response.status(statusCode).redirect(data)
