@@ -1,5 +1,6 @@
 import { Express, Router, Request, Response, NextFunction } from 'express'
 import expressHttpContext from 'express-http-context'
+import { ParamsDictionary, ParamsArray, Query } from 'express-serve-static-core'
 
 /**
  * Type definition for the Express application instance.
@@ -18,12 +19,42 @@ export type ExpsApp = Express
 export type ExpsRouter = Router
 
 /**
+ * Type definition for a dictionary of parameters.
+ *
+ * @export
+ * @typedef {ExpsParamsDictionary}
+ */
+export type ExpsParamsDictionary = ParamsDictionary
+
+/**
+ * Type definition for an array of parameters.
+ *
+ * @export
+ * @typedef {ExpsParamsArray}
+ */
+export type ExpsParamsArray = ParamsArray
+
+/**
+ * Type definition for parameters which can be either a dictionary or an array.
+ *
+ * @export
+ * @typedef {ExpsParams}
+ */
+export type ExpsParams = ExpsParamsDictionary | ExpsParamsArray
+
+/**
  * Type definition for the Express request object.
  *
  * @export
  * @typedef {ExpsRequest}
  */
-export type ExpsRequest = Request
+export type ExpsRequest<
+  PD = ParamsDictionary,
+  ResBody = any,
+  ReqBody = any,
+  ReqQuery = Query,
+  Locals extends Record<string, any> = Record<string, any>
+> = Request<PD, ResBody, ReqBody, ReqQuery, Locals>
 
 /**
  * Type definition for the Express response object.
@@ -31,7 +62,10 @@ export type ExpsRequest = Request
  * @export
  * @typedef {ExpsResponse}
  */
-export type ExpsResponse = Response
+export type ExpsResponse<
+  ResBody = any,
+  Locals extends Record<string, any> = Record<string, any>
+> = Response<ResBody, Locals>
 
 /**
  * Type definition for the Express next function.

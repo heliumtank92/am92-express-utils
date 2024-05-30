@@ -28,6 +28,9 @@ devDependencies:
   '@types/express':
     specifier: ^4.17.21
     version: 4.17.21
+  '@types/express-serve-static-core':
+    specifier: ^4.19.3
+    version: 4.19.3
   '@types/lodash':
     specifier: ^4.14.201
     version: 4.17.4
@@ -2436,8 +2439,8 @@ packages:
     dependencies:
       '@types/node': 20.12.13
 
-  /@types/express-serve-static-core@4.19.2:
-    resolution: {integrity: sha512-dPSEQElyVJ97BuGduAqQjpBocZWAs0GR94z+ptL7JXQJeJdHw2WBG3EWdFrK36b8Q6j8P4cXOMhgUoi0IIfIsg==}
+  /@types/express-serve-static-core@4.19.3:
+    resolution: {integrity: sha512-KOzM7MhcBFlmnlr/fzISFF5vGWVSvN6fTd4T+ExOt08bA/dA5kpSzY52nMsI1KDFmUREpJelPYyuslLRSjjgCg==}
     dependencies:
       '@types/node': 20.12.13
       '@types/qs': 6.9.15
@@ -2448,7 +2451,7 @@ packages:
     resolution: {integrity: sha512-ejlPM315qwLpaQlQDTjPdsUFSc6ZsP4AN6AlWnogPjQ7CVi7PYF3YVz+CY3jE2pwYf7E/7HlDAN0rV2GxTG0HQ==}
     dependencies:
       '@types/body-parser': 1.19.5
-      '@types/express-serve-static-core': 4.19.2
+      '@types/express-serve-static-core': 4.19.3
       '@types/qs': 6.9.15
       '@types/serve-static': 1.15.7
 
