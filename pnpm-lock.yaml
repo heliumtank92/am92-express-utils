@@ -9,8 +9,8 @@ dependencies:
     specifier: ^2.0.3
     version: 2.0.3
   '@am92/api-logger':
-    specifier: ^2.0.3
-    version: 2.0.3
+    specifier: ^2.0.4
+    version: 2.0.4
   express-http-context:
     specifier: ^1.2.4
     version: 1.2.4
@@ -63,8 +63,8 @@ packages:
       - aws-crt
     dev: false
 
-  /@am92/api-logger@2.0.3:
-    resolution: {integrity: sha512-LLIinOzY2xKTAA8ktUXKLMUm7bnYXf875VYzDQoTUeuNSCpgDgQY7MayCErfjB197GtOuujKDyCSjT+/afeH2g==}
+  /@am92/api-logger@2.0.4:
+    resolution: {integrity: sha512-zGIC2rebgZTTujXExCJalLYwF3Ba/Q6emwgjKIUlyGP3Gcl2mi/X60IRH5lc55/cAIkkUIXL/9u/6qm5LGr0eA==}
     dependencies:
       chalk: 4.1.2
       cls-hooked: 4.2.2
