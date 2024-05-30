@@ -9,11 +9,11 @@ import { SERVICE } from '../CONFIG'
  *
  * @export
  * @async
- * @param {ClientValidator} customValidateClient - The custom client validator to use for initialization.
+ * @param {?ClientValidator} customValidateClient - The custom client validator to use for initialization.
  * @returns {Promise<void>} - A promise that resolves when the initialization is complete.
  */
 export default async function initialize(
-  customValidateClient: ClientValidator
+  customValidateClient?: ClientValidator
 ): Promise<void> {
   console.trace(`[${SERVICE} ExpressUtils] Initialising...`)
   await ApiCrypto.initialize(customValidateClient)
