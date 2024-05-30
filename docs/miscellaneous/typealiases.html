@@ -121,6 +121,15 @@
                             <a href="#ExpsNextFunction" title="src/TYPES.ts" ><b>ExpsNextFunction</b>&nbsp;&nbsp;&nbsp;(src/.../TYPES.ts)</a>
                         </li>
                         <li>
+                            <a href="#ExpsParams" title="src/TYPES.ts" ><b>ExpsParams</b>&nbsp;&nbsp;&nbsp;(src/.../TYPES.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#ExpsParamsArray" title="src/TYPES.ts" ><b>ExpsParamsArray</b>&nbsp;&nbsp;&nbsp;(src/.../TYPES.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#ExpsParamsDictionary" title="src/TYPES.ts" ><b>ExpsParamsDictionary</b>&nbsp;&nbsp;&nbsp;(src/.../TYPES.ts)</a>
+                        </li>
+                        <li>
                             <a href="#ExpsRequest" title="src/TYPES.ts" ><b>ExpsRequest</b>&nbsp;&nbsp;&nbsp;(src/.../TYPES.ts)</a>
                         </li>
                         <li>
@@ -214,6 +223,72 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
+                    <a name="ExpsParams"></a>
+                    <span class="name "><b>ExpsParams</b><a href="#ExpsParams"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Type definition for parameters which can be either a dictionary or an array.</p>
+</div>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>    <code>ExpsParamsDictionary | ExpsParamsArray</code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ExpsParamsArray"></a>
+                    <span class="name "><b>ExpsParamsArray</b><a href="#ExpsParamsArray"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Type definition for an array of parameters.</p>
+</div>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>    <code>ParamsArray</code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ExpsParamsDictionary"></a>
+                    <span class="name "><b>ExpsParamsDictionary</b><a href="#ExpsParamsDictionary"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Type definition for a dictionary of parameters.</p>
+</div>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>    <code>ParamsDictionary</code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
                     <a name="ExpsRequest"></a>
                     <span class="name "><b>ExpsRequest</b><a href="#ExpsRequest"><span class="icon ion-ios-link"></span></a></span>
                 </td>
@@ -226,7 +301,7 @@
             </tr>
             <tr>
                 <td class="col-md-4">
-                    <code>    <code>Request</code>
+                    <code>    <code>Request&lt;PD | ResBody | ReqBody | ReqQuery | Locals&gt;</code>
 </code>
                 </td>
             </tr>
@@ -248,7 +323,7 @@
             </tr>
             <tr>
                 <td class="col-md-4">
-                    <code>    <code>Response</code>
+                    <code>    <code>Response&lt;ResBody | Locals&gt;</code>
 </code>
                 </td>
             </tr>
