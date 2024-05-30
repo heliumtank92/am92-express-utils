@@ -24,13 +24,13 @@ import {
  * @export
  * @param {ExpsRouter} router - The Express router instance to configure.
  * @param {ExpsRouterConfig} masterConfig - The master configuration object.
- * @param {ExpsRouterConfig} customConfig - The custom configuration object.
+ * @param {ExpsRouterConfig} [customConfig={ enabled: true }] - The custom configuration object.
  * @returns {Router} - The configured router instance.
  */
 export default function configureRouter(
   router: ExpsRouter,
   masterConfig: ExpsRouterConfig,
-  customConfig: ExpsRouterConfig
+  customConfig: ExpsRouterConfig = { enabled: true }
 ): Router {
   const config = _.merge(masterConfig, customConfig)
 
@@ -44,7 +44,8 @@ export default function configureRouter(
 function _buildRoutes(router: ExpsRouter, config: ExpsRouterConfig): void {
   const {
     routerName = '',
-    routesConfig,
+    routesConfig = {},
+    enabled: routerEnabled = false,
     disableCrypto: routerDisableCrypto = false,
     disableBodyLog: routerDisableBodyLog = false,
     preMiddlewares = [],
@@ -77,7 +78,7 @@ function _buildRoutes(router: ExpsRouter, config: ExpsRouterConfig): void {
     }
 
     // Handle Disabled Routes
-    if (!enabled) {
+    if (!enabled && !routerEnabled) {
       disabledRouted.push(route)
       return
     }

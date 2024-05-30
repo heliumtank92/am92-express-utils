@@ -300,6 +300,12 @@ export interface ExpsRouterConfig {
    */
   routerName?: string
   /**
+   * Whether all routes in the router are enabled.
+   *
+   * @type {?boolean}
+   */
+  enabled?: boolean
+  /**
    * Whether to disable encryption for all routes in the router.
    *
    * @type {?boolean}
@@ -326,9 +332,9 @@ export interface ExpsRouterConfig {
   /**
    * Configuration for the routes in the router.
    *
-   * @type {Record<string, ExpsRouteConfig>}
+   * @type {?Record<string, ExpsRouteConfig>}
    */
-  routesConfig: Record<string, ExpsRouteConfig>
+  routesConfig?: Record<string, ExpsRouteConfig>
 }
 
 /**
