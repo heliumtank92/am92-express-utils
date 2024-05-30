@@ -36,7 +36,10 @@ export default function configureApp(
 
   // Default Routes
   DEFAULT_ROUTES.forEach(route =>
-    app[route.method as ROUTE_METHODS](route.path, ...(route.pipeline || []))
+    app[route.method as ROUTE_METHODS](
+      route.path || '',
+      ...(route.pipeline || [])
+    )
   )
 
   // Custom Routes
