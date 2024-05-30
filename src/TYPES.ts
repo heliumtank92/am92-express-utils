@@ -337,9 +337,9 @@ export interface CustomErrorMap {
 declare global {
   /** @ignore */
   interface Console {
-    httpSuccess?: ApiLogger['httpSuccess']
-    httpInfo?: ApiLogger['httpInfo']
-    httpError?: ApiLogger['httpError']
+    httpSuccess(...data: any[]): void
+    httpInfo(...data: any[]): void
+    httpError(...data: any[]): void
   }
 
   /** @ignore */
