@@ -1,6 +1,6 @@
+import crypto from 'crypto'
 import { Request, Response, NextFunction } from 'express'
 import _ from 'lodash'
-import { nanoid } from 'nanoid'
 import httpContext from '../lib/httpContext'
 
 /**
@@ -30,12 +30,12 @@ export default function extractHeaders(
 
   // Handle Request ID Defaulting
   if (!httpContext.getRequestId()) {
-    httpContext.setRequestId(nanoid())
+    httpContext.setRequestId(crypto.randomUUID())
   }
 
   // Handle Session ID Defaulting
   if (!httpContext.getSessionId()) {
-    httpContext.setSessionId(nanoid())
+    httpContext.setSessionId(crypto.randomUUID())
   }
 
   process.nextTick(next)

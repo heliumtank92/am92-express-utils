@@ -26,10 +26,9 @@
   "homepage": "https://github.com/heliumtank92/am92-express-utils#readme",
   "dependencies": {
     "@am92/api-crypto": "^2.0.3",
-    "@am92/api-logger": "^2.0.2",
+    "@am92/api-logger": "^2.0.3",
     "express-http-context": "^1.2.4",
-    "lodash": "^4.17.21",
-    "nanoid": "^4.0.2"
+    "lodash": "^4.17.21"
   },
   "devDependencies": {
     "@babel/plugin-transform-private-methods": "^7.24.6",
