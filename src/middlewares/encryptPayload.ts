@@ -1,7 +1,7 @@
 import { ApiCrypto } from '@am92/api-crypto'
-import { Request, Response, NextFunction } from 'express'
 import ResponseBody from '../classes/ResponseBody'
 import httpContext from '../lib/httpContext'
+import { ExpsNextFunction, ExpsRequest, ExpsResponse } from '../TYPES'
 
 /**
  * Middleware to encrypt the payload from the request body.
@@ -11,14 +11,14 @@ import httpContext from '../lib/httpContext'
  * back into the response body.
  *
  * @export
- * @param {Request} request - The Express request object.
- * @param {Response} response - The Express response object.
- * @param {NextFunction} next - The next middleware function in the stack.
+ * @param {ExpsRequest} request - The Express request object.
+ * @param {ExpsResponse} response - The Express response object.
+ * @param {ExpsNextFunction} next - The next middleware function in the stack.
  */
 export default function encryptPayload(
-  request: Request,
-  response: Response,
-  next: NextFunction
+  request: ExpsRequest,
+  response: ExpsResponse,
+  next: ExpsNextFunction
 ) {
   const { body } = response
   const plaintextKey = httpContext.getPlaintextEncryptionKey()

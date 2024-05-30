@@ -3,8 +3,8 @@ import {
   ApiLoggerLogObject,
   namespace
 } from '@am92/api-logger'
-import { Request, Response, NextFunction } from 'express'
 import httpContext from '../lib/httpContext'
+import { ExpsRequest, ExpsResponse, ExpsNextFunction } from '../TYPES'
 
 /**
  * Middleware to log API requests and responses.
@@ -14,14 +14,14 @@ import httpContext from '../lib/httpContext'
  *
  * @export
  * @async
- * @param {Request} request - The Express request object.
- * @param {Response} response - The Express response object.
- * @param {NextFunction} next - The next middleware function in the stack.
+ * @param {ExpsRequest} request - The Express request object.
+ * @param {ExpsResponse} response - The Express response object.
+ * @param {ExpsNextFunction} next - The next middleware function in the stack.
  */
 export default function apiLogging(
-  request: Request,
-  response: Response,
-  next: NextFunction
+  request: ExpsRequest,
+  response: ExpsResponse,
+  next: ExpsNextFunction
 ): void {
   request.timestamp = Date.now()
 
@@ -41,21 +41,23 @@ export default function apiLogging(
  *
  * @export
  * @param {boolean} disableBodyLog - Flag to disable logging of request bodies.
- * @returns {(request: Request, response: Response, next: NextFunction) => void} - The middleware function.
  */
 export function logManager(disableBodyLog: boolean) {
   return function (
-    request: Request,
-    response: Response,
-    next: NextFunction
+    request: ExpsRequest,
+    response: ExpsResponse,
+    next: ExpsNextFunction
   ): void {
-    ;(request as any).disableBodyLog = !!disableBodyLog
+    request.disableBodyLog = !!disableBodyLog
     process.nextTick(next)
   }
 }
 
 /** @ignore */
-function _buildLogMeta(req: Request, res: Response): ApiLoggerLogObject {
+function _buildLogMeta(
+  req: ExpsRequest,
+  res: ExpsResponse
+): ApiLoggerLogObject {
   const {
     httpVersionMajor,
     httpVersionMinor,
@@ -123,7 +125,7 @@ function _getLogFunc(statusCode: number) {
 }
 
 /** @ignore */
-function _setTrackingId(next: NextFunction): void {
+function _setTrackingId(next: ExpsNextFunction): void {
   if (namespace.active) {
     const sessionId = httpContext.getSessionId()
     const requestId = httpContext.getRequestId()

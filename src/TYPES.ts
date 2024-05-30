@@ -167,9 +167,9 @@ export interface HttpContext {
  * Type definition for Express middleware functions.
  *
  * @export
- * @typedef {Middleware}
+ * @typedef {ExpsMiddleware}
  */
-export type Middleware = (
+export type ExpsMiddleware = (
   req: Request,
   res: Response,
   next: NextFunction
@@ -209,10 +209,10 @@ export type ROUTE_METHODS_CAPS =
  * Interface for defining a route or collection of routes with its associated router in the Express application.
  *
  * @export
- * @interface AppRoute
- * @typedef {AppRoute}
+ * @interface ExpsAppRoute
+ * @typedef {ExpsAppRoute}
  */
-export interface AppRoute {
+export interface ExpsAppRoute {
   /**
    * The path of the route.
    *
@@ -256,21 +256,21 @@ export interface ExpsRouteConfig {
   /**
    * Middleware functions to be executed before the main pipeline.
    *
-   * @type {?Middleware[]}
+   * @type {?ExpsMiddleware[]}
    */
-  prePipeline?: Middleware[]
+  prePipeline?: ExpsMiddleware[]
   /**
    * Middleware functions to be executed in the main pipeline.
    *
-   * @type {?Middleware[]}
+   * @type {?ExpsMiddleware[]}
    */
-  pipeline?: Middleware[]
+  pipeline?: ExpsMiddleware[]
   /**
    * Middleware functions to be executed after the main pipeline.
    *
-   * @type {?Middleware[]}
+   * @type {?ExpsMiddleware[]}
    */
-  postPipeline?: Middleware[]
+  postPipeline?: ExpsMiddleware[]
   /**
    * Whether to disable encryption for the route.
    *
@@ -314,15 +314,15 @@ export interface ExpsRouterConfig {
   /**
    * Middleware functions to be executed before the routes.
    *
-   * @type {?Middleware[]}
+   * @type {?ExpsMiddleware[]}
    */
-  preMiddlewares?: Middleware[]
+  preMiddlewares?: ExpsMiddleware[]
   /**
    * Middleware functions to be executed after the routes.
    *
-   * @type {?Middleware[]}
+   * @type {?ExpsMiddleware[]}
    */
-  postMiddlewares?: Middleware[]
+  postMiddlewares?: ExpsMiddleware[]
   /**
    * Configuration for the routes in the router.
    *

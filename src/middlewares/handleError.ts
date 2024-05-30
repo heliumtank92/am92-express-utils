@@ -1,10 +1,10 @@
 import { ApiCrypto } from '@am92/api-crypto'
-import { Request, Response, NextFunction } from 'express'
 
 import httpContext from '../lib/httpContext'
 import handleResponse from './handleResponse'
 import ResponseBody from '../classes/ResponseBody'
 import CustomError from '../classes/CustomError'
+import { ExpsRequest, ExpsResponse, ExpsNextFunction } from '../TYPES'
 
 /**
  * Middleware to handle errors in the request pipeline.
@@ -15,15 +15,15 @@ import CustomError from '../classes/CustomError'
  *
  * @export
  * @param {Error} piplelineError - The error object caught in the pipeline.
- * @param {Request} request - The Express request object.
- * @param {Response} response - The Express response object.
- * @param {NextFunction} next - The next middleware function in the stack.
+ * @param {ExpsRequest} request - The Express request object.
+ * @param {ExpsResponse} response - The Express response object.
+ * @param {ExpsNextFunction} next - The next middleware function in the stack.
  */
 export default function handleError(
   piplelineError: Error,
-  request: Request,
-  response: Response,
-  next: NextFunction
+  request: ExpsRequest,
+  response: ExpsResponse,
+  next: ExpsNextFunction
 ): void {
   if (!piplelineError) {
     process.nextTick(next)

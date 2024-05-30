@@ -1,4 +1,3 @@
-import { Express } from 'express'
 import expressHttpContext from 'express-http-context'
 
 import apiLogging from '../middlewares/apiLogging'
@@ -8,7 +7,7 @@ import handleError from '../middlewares/handleError'
 import DEFAULT_ROUTES from '../middlewares/DEFAULT_ROUTES'
 
 import { SERVICE } from '../CONFIG'
-import { AppRoute, ROUTE_METHODS } from '../TYPES'
+import { ExpsApp, ExpsAppRoute, ROUTE_METHODS } from '../TYPES'
 
 /**
  * Configures the Express application with the necessary middlewares and routes.
@@ -16,12 +15,12 @@ import { AppRoute, ROUTE_METHODS } from '../TYPES'
  * This function sets up the initial middleware pipeline, default routes, custom routes,
  * and the final middleware pipeline including error handling.
  *
- * @param {Express} app - The Express application instance to configure.
- * @param {AppRoute[]} [Routes=[]] - An optional array of custom routes to add to the application.
+ * @param {ExpsApp} app - The Express application instance to configure.
+ * @param {ExpsAppRoute[]} [Routes=[]] - An optional array of custom routes to add to the application.
  */
 export default function configureApp(
-  app: Express,
-  Routes: AppRoute[] = []
+  app: ExpsApp,
+  Routes: ExpsAppRoute[] = []
 ): void {
   if (!app || !app.use) {
     console.error(

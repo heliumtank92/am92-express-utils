@@ -1,6 +1,6 @@
 import { ApiCrypto } from '@am92/api-crypto'
-import { Request, Response, NextFunction } from 'express'
 import httpContext from '../lib/httpContext'
+import { ExpsRequest, ExpsResponse, ExpsNextFunction } from '../TYPES'
 
 /**
  * Middleware to decrypt the encryption key from the request context.
@@ -11,14 +11,14 @@ import httpContext from '../lib/httpContext'
  *
  * @export
  * @async
- * @param {Request} request - The Express request object.
- * @param {Response} response - The Express response object.
- * @param {NextFunction} next - The next middleware function in the stack.
+ * @param {ExpsRequest} request - The Express request object.
+ * @param {ExpsResponse} response - The Express response object.
+ * @param {ExpsNextFunction} next - The next middleware function in the stack.
  */
 export default async function decryptCryptoKey(
-  request: Request,
-  response: Response,
-  next: NextFunction
+  request: ExpsRequest,
+  response: ExpsResponse,
+  next: ExpsNextFunction
 ): Promise<void> {
   // Extract Headers
   const clientId = httpContext.getClientId()

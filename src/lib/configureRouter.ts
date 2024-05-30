@@ -13,21 +13,22 @@ import { SERVICE } from '../CONFIG'
 import {
   ExpsRouteConfig,
   ExpsRouterConfig,
-  Middleware,
-  ROUTE_METHODS
+  ExpsMiddleware,
+  ROUTE_METHODS,
+  ExpsRouter
 } from '../TYPES'
 
 /**
  * Configures the router with the provided master and custom configurations.
  *
  * @export
- * @param {Router} router - The Express router instance to configure.
+ * @param {ExpsRouter} router - The Express router instance to configure.
  * @param {ExpsRouterConfig} masterConfig - The master configuration object.
  * @param {ExpsRouterConfig} customConfig - The custom configuration object.
  * @returns {Router} - The configured router instance.
  */
 export default function configureRouter(
-  router: Router,
+  router: ExpsRouter,
   masterConfig: ExpsRouterConfig,
   customConfig: ExpsRouterConfig
 ): Router {
@@ -40,7 +41,7 @@ export default function configureRouter(
 }
 
 /** @ignore */
-function _buildRoutes(router: Router, config: ExpsRouterConfig): void {
+function _buildRoutes(router: ExpsRouter, config: ExpsRouterConfig): void {
   const {
     routerName,
     routesConfig,
@@ -82,8 +83,8 @@ function _buildRoutes(router: Router, config: ExpsRouterConfig): void {
     }
 
     // Handle Crypto Pipeline
-    let preCryptoPipeline: Middleware[] = [decryptCryptoKey, decryptPayload]
-    let postCryptoPipeline: Middleware[] = [encryptPayload]
+    let preCryptoPipeline: ExpsMiddleware[] = [decryptCryptoKey, decryptPayload]
+    let postCryptoPipeline: ExpsMiddleware[] = [encryptPayload]
     if (disableCrypto || routerDisableCrypto) {
       preCryptoPipeline = []
       postCryptoPipeline = []

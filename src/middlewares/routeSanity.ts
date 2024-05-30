@@ -1,4 +1,4 @@
-import { Request, Response, NextFunction } from 'express'
+import { ExpsRequest, ExpsResponse, ExpsNextFunction } from '../TYPES'
 
 /**
  * Middleware to sanity check the request and response objects.
@@ -8,14 +8,14 @@ import { Request, Response, NextFunction } from 'express'
  * selected response handler to process the response.
  *
  * @export
- * @param {Request} request - The Express request object.
- * @param {Response} response - The Express response object.
- * @param {NextFunction} next - The next middleware function in the stack.
+ * @param {ExpsRequest} request - The Express request object.
+ * @param {ExpsResponse} response - The Express response object.
+ * @param {ExpsNextFunction} next - The next middleware function in the stack.
  */
 export default function routeSanity(
-  request: Request,
-  response: Response,
-  next: NextFunction
+  request: ExpsRequest,
+  response: ExpsResponse,
+  next: ExpsNextFunction
 ): void {
   request.isMatch = true
   process.nextTick(next)

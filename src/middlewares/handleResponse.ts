@@ -1,7 +1,7 @@
-import { Request, Response, NextFunction } from 'express'
 import httpContext from '../lib/httpContext'
 import ResponseBody from '../classes/ResponseBody'
 import CONSTANTS from '../CONSTANTS'
+import { ExpsRequest, ExpsResponse, ExpsNextFunction } from '../TYPES'
 
 /**
  * Middleware to handle the response for the request.
@@ -11,14 +11,14 @@ import CONSTANTS from '../CONSTANTS'
  * selected response handler to process the response.
  *
  * @export
- * @param {Request} request - The Express request object.
- * @param {Response} response - The Express response object.
- * @param {NextFunction} next - The next middleware function in the stack.
+ * @param {ExpsRequest} request - The Express request object.
+ * @param {ExpsResponse} response - The Express response object.
+ * @param {ExpsNextFunction} next - The next middleware function in the stack.
  */
 export default function handleResponse(
-  request: Request,
-  response: Response,
-  next: NextFunction
+  request: ExpsRequest,
+  response: ExpsResponse,
+  next: ExpsNextFunction
 ): void {
   // Set Headers
   _setHeaders(request, response)
@@ -33,7 +33,7 @@ export default function handleResponse(
 }
 
 /** @ignore */
-function _setHeaders(request: Request, response: Response) {
+function _setHeaders(request: ExpsRequest, response: ExpsResponse) {
   const requestId = httpContext.getRequestId()
   const sessionId = httpContext.getSessionId()
 
@@ -54,9 +54,9 @@ function _setHeaders(request: Request, response: Response) {
 
 /** @ignore */
 function _handleNoRouteResponse(
-  request: Request,
-  response: Response,
-  next: NextFunction
+  request: ExpsRequest,
+  response: ExpsResponse,
+  next: ExpsNextFunction
 ) {
   const { method, originalUrl } = request
   const message = `Cannot ${method} ${originalUrl}`
@@ -67,9 +67,9 @@ function _handleNoRouteResponse(
 
 /** @ignore */
 function _handleDataResponse(
-  request: Request,
-  response: Response,
-  next: NextFunction
+  request: ExpsRequest,
+  response: ExpsResponse,
+  next: ExpsNextFunction
 ) {
   const resBody = response.encryptedBody || response.body || {}
   const handler =
@@ -81,7 +81,7 @@ function _handleDataResponse(
 }
 
 /** @ignore */
-function _sendResponse(request: Request, response: Response) {
+function _sendResponse(request: ExpsRequest, response: ExpsResponse) {
   let resBody = response.encryptedBody || response.body || {}
 
   if (!resBody.statusCode) {
@@ -93,9 +93,9 @@ function _sendResponse(request: Request, response: Response) {
 
 /** @ignore */
 function _redirectResponse(
-  request: Request,
-  response: Response,
-  next: NextFunction
+  request: ExpsRequest,
+  response: ExpsResponse,
+  next: ExpsNextFunction
 ) {
   const resBody = response.encryptedBody || response.body || {}
   const { statusCode, data } = resBody

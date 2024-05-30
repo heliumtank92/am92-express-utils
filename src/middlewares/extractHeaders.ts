@@ -1,7 +1,7 @@
 import crypto from 'crypto'
-import { Request, Response, NextFunction } from 'express'
 import _ from 'lodash'
 import httpContext from '../lib/httpContext'
+import { ExpsRequest, ExpsResponse, ExpsNextFunction } from '../TYPES'
 
 /**
  * Middleware to extract headers from the request and set them in the httpContext.
@@ -11,14 +11,14 @@ import httpContext from '../lib/httpContext'
  * are set in the context if they are not already present.
  *
  * @export
- * @param {Request} request - The Express request object.
- * @param {Response} response - The Express response object.
- * @param {NextFunction} next - The next middleware function in the stack.
+ * @param {ExpsRequest} request - The Express request object.
+ * @param {ExpsResponse} response - The Express response object.
+ * @param {ExpsNextFunction} next - The next middleware function in the stack.
  */
 export default function extractHeaders(
-  request: Request,
-  response: Response,
-  next: NextFunction
+  request: ExpsRequest,
+  response: ExpsResponse,
+  next: ExpsNextFunction
 ): void {
   const { headers = {} } = request
 

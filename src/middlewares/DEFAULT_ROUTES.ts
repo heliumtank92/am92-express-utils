@@ -1,11 +1,15 @@
 import { ApiCrypto } from '@am92/api-crypto'
-import { Request, Response, NextFunction } from 'express'
 
 import ResponseBody from '../classes/ResponseBody'
 import httpContext from '../lib/httpContext'
 import asyncWrapper from '../lib/asyncWrapper'
 import routeSanity from './routeSanity'
-import { ExpsRouteConfig } from '../TYPES'
+import {
+  ExpsNextFunction,
+  ExpsRequest,
+  ExpsResponse,
+  ExpsRouteConfig
+} from '../TYPES'
 
 /**
  * Default routes configuration for the Express application.
@@ -38,14 +42,14 @@ export default DEFAULT_ROUTES
 /**
  * Handles the health check route.
  *
- * @param {Request} request - The Express request object.
- * @param {Response} response - The Express response object.
- * @param {NextFunction} next - The next middleware function in the stack.
+ * @param {ExpsRequest} request - The Express request object.
+ * @param {ExpsResponse} response - The Express response object.
+ * @param {ExpsNextFunction} next - The next middleware function in the stack.
  */
 function healthHandler(
-  request: Request,
-  response: Response,
-  next: NextFunction
+  request: ExpsRequest,
+  response: ExpsResponse,
+  next: ExpsNextFunction
 ) {
   response.body = new ResponseBody(200, 'Health Check Succesful')
   return process.nextTick(next)
@@ -54,14 +58,14 @@ function healthHandler(
 /**
  * Handles the version check route.
  *
- * @param {Request} request - The Express request object.
- * @param {Response} response - The Express response object.
- * @param {NextFunction} next - The next middleware function in the stack.
+ * @param {ExpsRequest} request - The Express request object.
+ * @param {ExpsResponse} response - The Express response object.
+ * @param {ExpsNextFunction} next - The next middleware function in the stack.
  */
 function versionHandler(
-  request: Request,
-  response: Response,
-  next: NextFunction
+  request: ExpsRequest,
+  response: ExpsResponse,
+  next: ExpsNextFunction
 ) {
   const { npm_package_name: name = '', npm_package_version: version = '' } =
     process.env
@@ -76,14 +80,14 @@ function versionHandler(
 /**
  * Handles the handshake route.
  *
- * @param {Request} request - The Express request object.
- * @param {Response} response - The Express response object.
- * @param {NextFunction} next - The next middleware function in the stack.
+ * @param {ExpsRequest} request - The Express request object.
+ * @param {ExpsResponse} response - The Express response object.
+ * @param {ExpsNextFunction} next - The next middleware function in the stack.
  */
 async function handshakeHandler(
-  request: Request,
-  response: Response,
-  next: NextFunction
+  request: ExpsRequest,
+  response: ExpsResponse,
+  next: ExpsNextFunction
 ) {
   const clientId = httpContext.getClientId()
   const publicKey = await ApiCrypto.getPublicKey(clientId || '')
