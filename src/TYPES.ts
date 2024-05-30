@@ -244,15 +244,15 @@ export interface ExpsRouteConfig {
   /**
    * The HTTP method for the route in a case insensitive manner.
    *
-   * @type {(ROUTE_METHODS | ROUTE_METHODS_CAPS)}
+   * @type {?(ROUTE_METHODS | ROUTE_METHODS_CAPS)}
    */
-  method: ROUTE_METHODS | ROUTE_METHODS_CAPS
+  method?: ROUTE_METHODS | ROUTE_METHODS_CAPS
   /**
    * The path of the route.
    *
-   * @type {string}
+   * @type {?string}
    */
-  path: string
+  path?: string
   /**
    * Middleware functions to be executed before the main pipeline.
    *
@@ -296,9 +296,9 @@ export interface ExpsRouterConfig {
   /**
    * The name of the router.
    *
-   * @type {string}
+   * @type {?string}
    */
-  routerName: string
+  routerName?: string
   /**
    * Whether to disable encryption for all routes in the router.
    *

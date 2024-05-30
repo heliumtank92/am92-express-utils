@@ -43,7 +43,7 @@ export default function configureRouter(
 /** @ignore */
 function _buildRoutes(router: ExpsRouter, config: ExpsRouterConfig): void {
   const {
-    routerName,
+    routerName = '',
     routesConfig,
     disableCrypto: routerDisableCrypto = false,
     disableBodyLog: routerDisableBodyLog = false,
