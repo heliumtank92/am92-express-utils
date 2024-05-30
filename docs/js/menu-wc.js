@@ -75,10 +75,10 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                         </div>
                         <ul class="links collapse " ${ isNormalMode ? ' id="interfaces-links"' : 'id="xs-interfaces-links"' }>
                             <li class="link">
-                                <a href="interfaces/AppRoute.html" data-type="entity-link" >AppRoute</a>
+                                <a href="interfaces/CustomErrorMap.html" data-type="entity-link" >CustomErrorMap</a>
                             </li>
                             <li class="link">
-                                <a href="interfaces/CustomErrorMap.html" data-type="entity-link" >CustomErrorMap</a>
+                                <a href="interfaces/ExpsAppRoute.html" data-type="entity-link" >ExpsAppRoute</a>
                             </li>
                             <li class="link">
                                 <a href="interfaces/ExpsConstants.html" data-type="entity-link" >ExpsConstants</a>
