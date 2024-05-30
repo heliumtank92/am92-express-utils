@@ -56,22 +56,22 @@ export default class ResponseBody {
    * Creates an instance of ResponseBody.
    *
    * @constructor
-   * @param {number} statusCode
+   * @param {?number} [statusCode]
    * @param {?string} [message]
    * @param {?*} [data]
    * @param {?*} [error]
    * @param {?string} [errorCode]
    */
   constructor(
-    statusCode: number,
+    statusCode?: number,
     message?: string,
     data?: any,
     error?: any,
     errorCode?: string
   ) {
     this.statusCode = statusCode || DEFAULT_ERROR_STATUS_CODE
-    this.status = http.STATUS_CODES[statusCode] || 'Internal Server Error'
-    this.message = message || statusCode ? this.status : DEFAULT_ERROR_MSG
+    this.status = http.STATUS_CODES[this.statusCode] || 'Internal Server Error'
+    this.message = message || (statusCode && this.status) || DEFAULT_ERROR_MSG
     this.data = data
     this.error = error
     this.errorCode = error && (errorCode || DEFAULT_ERROR_CODE)
