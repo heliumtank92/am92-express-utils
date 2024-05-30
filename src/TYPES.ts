@@ -1,8 +1,45 @@
-import { ApiLogger } from '@am92/api-logger'
 import { Express, Router, Request, Response, NextFunction } from 'express'
 import expressHttpContext from 'express-http-context'
 
-export { Express, Router, Request, Response, NextFunction }
+/**
+ * Type definition for the Express application instance.
+ *
+ * @export
+ * @typedef {ExpsApp}
+ */
+export type ExpsApp = Express
+
+/**
+ * Type definition for the Express router instance.
+ *
+ * @export
+ * @typedef {ExpsRouter}
+ */
+export type ExpsRouter = Router
+
+/**
+ * Type definition for the Express request object.
+ *
+ * @export
+ * @typedef {ExpsRequest}
+ */
+export type ExpsRequest = Request
+
+/**
+ * Type definition for the Express response object.
+ *
+ * @export
+ * @typedef {ExpsResponse}
+ */
+export type ExpsResponse = Response
+
+/**
+ * Type definition for the Express next function.
+ *
+ * @export
+ * @typedef {ExpsNextFunction}
+ */
+export type ExpsNextFunction = NextFunction
 
 /**
  * Interface for defining constants used in the Express application.
