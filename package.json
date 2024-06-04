@@ -23,10 +23,10 @@
     "commit:docs": "git add docs && git commit -m 'Docs Updated'"
   },
   "repository": "git@github.com:heliumtank92/am92-express-utils.git",
-  "homepage": "https://github.com/heliumtank92/am92-express-utils#readme",
+  "homepage": "https://heliumtank92.github.io/am92-express-utils",
   "dependencies": {
-    "@am92/api-crypto": "^2.0.3",
-    "@am92/api-logger": "^2.0.4",
+    "@am92/api-crypto": "^2.0.4",
+    "@am92/api-logger": "^2.0.5",
     "express-http-context": "^1.2.4",
     "lodash": "^4.17.21"
   },
