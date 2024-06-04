@@ -1,0 +1,1856 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>ExpressUtils</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">ExpressUtils</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content miscellaneous-functions">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Miscellaneous</li>
+  <li class="breadcrumb-item">Functions</li>
+</ol>
+
+<section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <ul class="index-list">
+                        <li>
+                            <a href="#apiLogging" title="src/middlewares/apiLogging.ts" ><b>apiLogging</b>&nbsp;&nbsp;&nbsp;(src/.../apiLogging.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#asyncWrapper" title="src/lib/asyncWrapper.ts" ><b>asyncWrapper</b>&nbsp;&nbsp;&nbsp;(src/.../asyncWrapper.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#configureApp" title="src/lib/configureApp.ts" ><b>configureApp</b>&nbsp;&nbsp;&nbsp;(src/.../configureApp.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#configureRouter" title="src/lib/configureRouter.ts" ><b>configureRouter</b>&nbsp;&nbsp;&nbsp;(src/.../configureRouter.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#decryptCryptoKey" title="src/middlewares/decryptCryptoKey.ts" ><b>decryptCryptoKey</b>&nbsp;&nbsp;&nbsp;(src/.../decryptCryptoKey.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#decryptPayload" title="src/middlewares/decryptPayload.ts" ><b>decryptPayload</b>&nbsp;&nbsp;&nbsp;(src/.../decryptPayload.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#encryptPayload" title="src/middlewares/encryptPayload.ts" ><b>encryptPayload</b>&nbsp;&nbsp;&nbsp;(src/.../encryptPayload.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#extractHeaders" title="src/middlewares/extractHeaders.ts" ><b>extractHeaders</b>&nbsp;&nbsp;&nbsp;(src/.../extractHeaders.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#handleError" title="src/middlewares/handleError.ts" ><b>handleError</b>&nbsp;&nbsp;&nbsp;(src/.../handleError.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#handleResponse" title="src/middlewares/handleResponse.ts" ><b>handleResponse</b>&nbsp;&nbsp;&nbsp;(src/.../handleResponse.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#handshakeHandler" title="src/middlewares/DEFAULT_ROUTES.ts" ><b>handshakeHandler</b>&nbsp;&nbsp;&nbsp;(src/.../DEFAULT_ROUTES.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#healthHandler" title="src/middlewares/DEFAULT_ROUTES.ts" ><b>healthHandler</b>&nbsp;&nbsp;&nbsp;(src/.../DEFAULT_ROUTES.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#initialize" title="src/lib/initialize.ts" ><b>initialize</b>&nbsp;&nbsp;&nbsp;(src/.../initialize.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#logManager" title="src/middlewares/apiLogging.ts" ><b>logManager</b>&nbsp;&nbsp;&nbsp;(src/.../apiLogging.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#routeSanity" title="src/middlewares/routeSanity.ts" ><b>routeSanity</b>&nbsp;&nbsp;&nbsp;(src/.../routeSanity.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#versionHandler" title="src/middlewares/DEFAULT_ROUTES.ts" ><b>versionHandler</b>&nbsp;&nbsp;&nbsp;(src/.../DEFAULT_ROUTES.ts)</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+
+    <h3>src/middlewares/apiLogging.ts</h3>
+    <section data-compodoc="block-methods">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="apiLogging"></a>
+                    <span class="name">
+                        <span ><b>apiLogging</b></span>
+                        <a href="#apiLogging"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>apiLogging(request: <a href="../undefineds/ExpsRequest.html" target="_self">ExpsRequest</a>, response: <a href="../undefineds/ExpsResponse.html" target="_self">ExpsResponse</a>, next: <a href="../undefineds/ExpsNextFunction.html" target="_self">ExpsNextFunction</a>)</code>
+                </td>
+            </tr>
+
+
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Middleware to log API requests and responses.</p>
+<p>This middleware captures the timestamp when a request is received and logs
+the request and response details once the response is finished.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>request</td>
+                                            <td>
+                                                            <code><a href="../miscellaneous/typealiases.html#ExpsRequest" target="_self" >ExpsRequest</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>The Express request object.</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                                <td>response</td>
+                                            <td>
+                                                            <code><a href="../miscellaneous/typealiases.html#ExpsResponse" target="_self" >ExpsResponse</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>The Express response object.</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                                <td>next</td>
+                                            <td>
+                                                            <code><a href="../miscellaneous/typealiases.html#ExpsNextFunction" target="_self" >ExpsNextFunction</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>The next middleware function in the stack.</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="logManager"></a>
+                    <span class="name">
+                        <span ><b>logManager</b></span>
+                        <a href="#logManager"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>logManager(disableBodyLog: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank">boolean</a>)</code>
+                </td>
+            </tr>
+
+
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Middleware to manage logging configuration.</p>
+<p>This middleware allows enabling or disabling the logging of request bodies.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>disableBodyLog</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>Flag to disable logging of request bodies.</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>    <h3>src/lib/asyncWrapper.ts</h3>
+    <section data-compodoc="block-methods">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="asyncWrapper"></a>
+                    <span class="name">
+                        <span ><b>asyncWrapper</b></span>
+                        <a href="#asyncWrapper"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>asyncWrapper(middleware: <a href="../undefineds/ExpsMiddleware.html" target="_self">ExpsMiddleware</a>)</code>
+                </td>
+            </tr>
+
+
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>A utility function to wrap asynchronous middleware functions.
+This ensures that any errors thrown in the middleware are passed to the next error handling middleware.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>middleware</td>
+                                            <td>
+                                                            <code><a href="../miscellaneous/typealiases.html#ExpsMiddleware" target="_self" >ExpsMiddleware</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="../miscellaneous/typealiases.html#ExpsMiddleware" target="_self" >ExpsMiddleware</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>    <h3>src/lib/configureApp.ts</h3>
+    <section data-compodoc="block-methods">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="configureApp"></a>
+                    <span class="name">
+                        <span ><b>configureApp</b></span>
+                        <a href="#configureApp"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>configureApp(app: <a href="../undefineds/ExpsApp.html" target="_self">ExpsApp</a>, Routes)</code>
+                </td>
+            </tr>
+
+
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Configures the Express application with the necessary middlewares and routes.</p>
+<p>This function sets up the initial middleware pipeline, default routes, custom routes,
+and the final middleware pipeline including error handling.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Default value</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>app</td>
+                                            <td>
+                                                            <code><a href="../miscellaneous/typealiases.html#ExpsApp" target="_self" >ExpsApp</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+                                            <td>
+                                            </td>
+
+                                            <td>
+                                                    <ul>
+<li>The Express application instance to configure.</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                                <td>Routes</td>
+                                            <td>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+                                            <td>
+                                                    <code>[]</code>
+                                            </td>
+
+                                            <td>
+                                                    <ul>
+<li>An optional array of custom routes to add to the application.</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>    <h3>src/lib/configureRouter.ts</h3>
+    <section data-compodoc="block-methods">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="configureRouter"></a>
+                    <span class="name">
+                        <span ><b>configureRouter</b></span>
+                        <a href="#configureRouter"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>configureRouter(router: <a href="../undefineds/ExpsRouter.html" target="_self">ExpsRouter</a>, masterConfig: <a href="../interfaces/ExpsRouterConfig.html" target="_self">ExpsRouterConfig</a>, customConfig: <a href="../interfaces/ExpsRouterConfig.html" target="_self">ExpsRouterConfig</a>)</code>
+                </td>
+            </tr>
+
+
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Configures the router with the provided master and custom configurations.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Default value</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>router</td>
+                                            <td>
+                                                            <code><a href="../miscellaneous/typealiases.html#ExpsRouter" target="_self" >ExpsRouter</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+                                            <td>
+                                            </td>
+
+                                            <td>
+                                                    <ul>
+<li>The Express router instance to configure.</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                                <td>masterConfig</td>
+                                            <td>
+                                                            <code><a href="../interfaces/ExpsRouterConfig.html" target="_self" >ExpsRouterConfig</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+                                            <td>
+                                            </td>
+
+                                            <td>
+                                                    <ul>
+<li>The master configuration object.</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                                <td>customConfig</td>
+                                            <td>
+                                                            <code><a href="../interfaces/ExpsRouterConfig.html" target="_self" >ExpsRouterConfig</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+                                            <td>
+                                                    <code>{ enabled: true }</code>
+                                            </td>
+
+                                            <td>
+                                                    <ul>
+<li>The custom configuration object.</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Router</code>
+
+                        </div>
+                            <div class="io-description">
+                                <ul>
+<li>The configured router instance.</li>
+</ul>
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>    <h3>src/middlewares/decryptCryptoKey.ts</h3>
+    <section data-compodoc="block-methods">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="decryptCryptoKey"></a>
+                    <span class="name">
+                        <span ><b>decryptCryptoKey</b></span>
+                        <a href="#decryptCryptoKey"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>decryptCryptoKey(request: <a href="../undefineds/ExpsRequest.html" target="_self">ExpsRequest</a>, response: <a href="../undefineds/ExpsResponse.html" target="_self">ExpsResponse</a>, next: <a href="../undefineds/ExpsNextFunction.html" target="_self">ExpsNextFunction</a>)</code>
+                </td>
+            </tr>
+
+
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Middleware to decrypt the encryption key from the request context.</p>
+<p>This middleware retrieves the client ID and the encrypted encryption key from the request context,
+decrypts the encryption key using the ApiCrypto module, and then sets the decrypted key back into the context.
+It ensures that the decrypted key is available for subsequent middleware or request handlers.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>request</td>
+                                            <td>
+                                                            <code><a href="../miscellaneous/typealiases.html#ExpsRequest" target="_self" >ExpsRequest</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>The Express request object.</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                                <td>response</td>
+                                            <td>
+                                                            <code><a href="../miscellaneous/typealiases.html#ExpsResponse" target="_self" >ExpsResponse</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>The Express response object.</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                                <td>next</td>
+                                            <td>
+                                                            <code><a href="../miscellaneous/typealiases.html#ExpsNextFunction" target="_self" >ExpsNextFunction</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>The next middleware function in the stack.</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Promise&lt;void&gt;</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>    <h3>src/middlewares/decryptPayload.ts</h3>
+    <section data-compodoc="block-methods">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="decryptPayload"></a>
+                    <span class="name">
+                        <span ><b>decryptPayload</b></span>
+                        <a href="#decryptPayload"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>decryptPayload(request: <a href="../undefineds/ExpsRequest.html" target="_self">ExpsRequest</a>, response: <a href="../undefineds/ExpsResponse.html" target="_self">ExpsResponse</a>, next: <a href="../undefineds/ExpsNextFunction.html" target="_self">ExpsNextFunction</a>)</code>
+                </td>
+            </tr>
+
+
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Middleware to decrypt the payload from the request body.</p>
+<p>This middleware retrieves the encrypted payload from the request body,
+decrypts it using the plaintext encryption key retrieved from the context,
+and then sets the decrypted payload back into the request body.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>request</td>
+                                            <td>
+                                                            <code><a href="../miscellaneous/typealiases.html#ExpsRequest" target="_self" >ExpsRequest</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>The Express request object.</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                                <td>response</td>
+                                            <td>
+                                                            <code><a href="../miscellaneous/typealiases.html#ExpsResponse" target="_self" >ExpsResponse</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>The Express response object.</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                                <td>next</td>
+                                            <td>
+                                                            <code><a href="../miscellaneous/typealiases.html#ExpsNextFunction" target="_self" >ExpsNextFunction</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>The next middleware function in the stack.</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>    <h3>src/middlewares/encryptPayload.ts</h3>
+    <section data-compodoc="block-methods">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="encryptPayload"></a>
+                    <span class="name">
+                        <span ><b>encryptPayload</b></span>
+                        <a href="#encryptPayload"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>encryptPayload(request: <a href="../undefineds/ExpsRequest.html" target="_self">ExpsRequest</a>, response: <a href="../undefineds/ExpsResponse.html" target="_self">ExpsResponse</a>, next: <a href="../undefineds/ExpsNextFunction.html" target="_self">ExpsNextFunction</a>)</code>
+                </td>
+            </tr>
+
+
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Middleware to encrypt the payload from the request body.</p>
+<p>This middleware retrieves the plaintext encryption key from the context,
+encrypts the payload using the ApiCrypto module, and then sets the encrypted payload
+back into the response body.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>request</td>
+                                            <td>
+                                                            <code><a href="../miscellaneous/typealiases.html#ExpsRequest" target="_self" >ExpsRequest</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>The Express request object.</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                                <td>response</td>
+                                            <td>
+                                                            <code><a href="../miscellaneous/typealiases.html#ExpsResponse" target="_self" >ExpsResponse</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>The Express response object.</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                                <td>next</td>
+                                            <td>
+                                                            <code><a href="../miscellaneous/typealiases.html#ExpsNextFunction" target="_self" >ExpsNextFunction</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>The next middleware function in the stack.</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>    <h3>src/middlewares/extractHeaders.ts</h3>
+    <section data-compodoc="block-methods">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="extractHeaders"></a>
+                    <span class="name">
+                        <span ><b>extractHeaders</b></span>
+                        <a href="#extractHeaders"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>extractHeaders(request: <a href="../undefineds/ExpsRequest.html" target="_self">ExpsRequest</a>, response: <a href="../undefineds/ExpsResponse.html" target="_self">ExpsResponse</a>, next: <a href="../undefineds/ExpsNextFunction.html" target="_self">ExpsNextFunction</a>)</code>
+                </td>
+            </tr>
+
+
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Middleware to extract headers from the request and set them in the httpContext.</p>
+<p>This middleware iterates over the request headers, converts them to lowercase,
+and sets them in the httpContext. It also ensures that a request ID and session ID
+are set in the context if they are not already present.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>request</td>
+                                            <td>
+                                                            <code><a href="../miscellaneous/typealiases.html#ExpsRequest" target="_self" >ExpsRequest</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>The Express request object.</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                                <td>response</td>
+                                            <td>
+                                                            <code><a href="../miscellaneous/typealiases.html#ExpsResponse" target="_self" >ExpsResponse</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>The Express response object.</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                                <td>next</td>
+                                            <td>
+                                                            <code><a href="../miscellaneous/typealiases.html#ExpsNextFunction" target="_self" >ExpsNextFunction</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>The next middleware function in the stack.</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>    <h3>src/middlewares/handleError.ts</h3>
+    <section data-compodoc="block-methods">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="handleError"></a>
+                    <span class="name">
+                        <span ><b>handleError</b></span>
+                        <a href="#handleError"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>handleError(piplelineError: Error, request: <a href="../undefineds/ExpsRequest.html" target="_self">ExpsRequest</a>, response: <a href="../undefineds/ExpsResponse.html" target="_self">ExpsResponse</a>, next: <a href="../undefineds/ExpsNextFunction.html" target="_self">ExpsNextFunction</a>)</code>
+                </td>
+            </tr>
+
+
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Middleware to handle errors in the request pipeline.</p>
+<p>This middleware function processes errors that occur during the request pipeline.
+It distinguishes between custom errors and other errors, formats the response body accordingly,
+and optionally encrypts the response if an encryption key is available.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>piplelineError</td>
+                                            <td>
+                                                        <code>Error</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>The error object caught in the pipeline.</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                                <td>request</td>
+                                            <td>
+                                                            <code><a href="../miscellaneous/typealiases.html#ExpsRequest" target="_self" >ExpsRequest</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>The Express request object.</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                                <td>response</td>
+                                            <td>
+                                                            <code><a href="../miscellaneous/typealiases.html#ExpsResponse" target="_self" >ExpsResponse</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>The Express response object.</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                                <td>next</td>
+                                            <td>
+                                                            <code><a href="../miscellaneous/typealiases.html#ExpsNextFunction" target="_self" >ExpsNextFunction</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>The next middleware function in the stack.</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>    <h3>src/middlewares/handleResponse.ts</h3>
+    <section data-compodoc="block-methods">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="handleResponse"></a>
+                    <span class="name">
+                        <span ><b>handleResponse</b></span>
+                        <a href="#handleResponse"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>handleResponse(request: <a href="../undefineds/ExpsRequest.html" target="_self">ExpsRequest</a>, response: <a href="../undefineds/ExpsResponse.html" target="_self">ExpsResponse</a>, next: <a href="../undefineds/ExpsNextFunction.html" target="_self">ExpsNextFunction</a>)</code>
+                </td>
+            </tr>
+
+
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Middleware to handle the response for the request.</p>
+<p>This middleware function sets the necessary headers and determines the appropriate response handler
+based on whether the response is an error or if the request matches a route. It then invokes the
+selected response handler to process the response.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>request</td>
+                                            <td>
+                                                            <code><a href="../miscellaneous/typealiases.html#ExpsRequest" target="_self" >ExpsRequest</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>The Express request object.</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                                <td>response</td>
+                                            <td>
+                                                            <code><a href="../miscellaneous/typealiases.html#ExpsResponse" target="_self" >ExpsResponse</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>The Express response object.</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                                <td>next</td>
+                                            <td>
+                                                            <code><a href="../miscellaneous/typealiases.html#ExpsNextFunction" target="_self" >ExpsNextFunction</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>The next middleware function in the stack.</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>    <h3>src/middlewares/DEFAULT_ROUTES.ts</h3>
+    <section data-compodoc="block-methods">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="handshakeHandler"></a>
+                    <span class="name">
+                        <span ><b>handshakeHandler</b></span>
+                        <a href="#handshakeHandler"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>handshakeHandler(request: <a href="../undefineds/ExpsRequest.html" target="_self">ExpsRequest</a>, response: <a href="../undefineds/ExpsResponse.html" target="_self">ExpsResponse</a>, next: <a href="../undefineds/ExpsNextFunction.html" target="_self">ExpsNextFunction</a>)</code>
+                </td>
+            </tr>
+
+
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Handles the handshake route.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>request</td>
+                                            <td>
+                                                            <code><a href="../miscellaneous/typealiases.html#ExpsRequest" target="_self" >ExpsRequest</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>The Express request object.</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                                <td>response</td>
+                                            <td>
+                                                            <code><a href="../miscellaneous/typealiases.html#ExpsResponse" target="_self" >ExpsResponse</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>The Express response object.</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                                <td>next</td>
+                                            <td>
+                                                            <code><a href="../miscellaneous/typealiases.html#ExpsNextFunction" target="_self" >ExpsNextFunction</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>The next middleware function in the stack.</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="healthHandler"></a>
+                    <span class="name">
+                        <span ><b>healthHandler</b></span>
+                        <a href="#healthHandler"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>healthHandler(request: <a href="../undefineds/ExpsRequest.html" target="_self">ExpsRequest</a>, response: <a href="../undefineds/ExpsResponse.html" target="_self">ExpsResponse</a>, next: <a href="../undefineds/ExpsNextFunction.html" target="_self">ExpsNextFunction</a>)</code>
+                </td>
+            </tr>
+
+
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Handles the health check route.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>request</td>
+                                            <td>
+                                                            <code><a href="../miscellaneous/typealiases.html#ExpsRequest" target="_self" >ExpsRequest</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>The Express request object.</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                                <td>response</td>
+                                            <td>
+                                                            <code><a href="../miscellaneous/typealiases.html#ExpsResponse" target="_self" >ExpsResponse</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>The Express response object.</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                                <td>next</td>
+                                            <td>
+                                                            <code><a href="../miscellaneous/typealiases.html#ExpsNextFunction" target="_self" >ExpsNextFunction</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>The next middleware function in the stack.</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="versionHandler"></a>
+                    <span class="name">
+                        <span ><b>versionHandler</b></span>
+                        <a href="#versionHandler"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>versionHandler(request: <a href="../undefineds/ExpsRequest.html" target="_self">ExpsRequest</a>, response: <a href="../undefineds/ExpsResponse.html" target="_self">ExpsResponse</a>, next: <a href="../undefineds/ExpsNextFunction.html" target="_self">ExpsNextFunction</a>)</code>
+                </td>
+            </tr>
+
+
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Handles the version check route.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>request</td>
+                                            <td>
+                                                            <code><a href="../miscellaneous/typealiases.html#ExpsRequest" target="_self" >ExpsRequest</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>The Express request object.</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                                <td>response</td>
+                                            <td>
+                                                            <code><a href="../miscellaneous/typealiases.html#ExpsResponse" target="_self" >ExpsResponse</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>The Express response object.</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                                <td>next</td>
+                                            <td>
+                                                            <code><a href="../miscellaneous/typealiases.html#ExpsNextFunction" target="_self" >ExpsNextFunction</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>The next middleware function in the stack.</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>    <h3>src/lib/initialize.ts</h3>
+    <section data-compodoc="block-methods">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="initialize"></a>
+                    <span class="name">
+                        <span ><b>initialize</b></span>
+                        <a href="#initialize"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>initialize(customValidateClient?: ClientValidator)</code>
+                </td>
+            </tr>
+
+
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Initializes the ApiCrypto module with a custom client validator.</p>
+<p>This function sets up the ApiCrypto module by passing a custom client validator.
+It logs the initialization process for debugging and informational purposes.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>customValidateClient</td>
+                                            <td>
+                                                        <code>ClientValidator</code>
+                                            </td>
+
+                                            <td>
+                                                    Yes
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>The custom client validator to use for initialization.</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Promise&lt;void&gt;</code>
+
+                        </div>
+                            <div class="io-description">
+                                <ul>
+<li>A promise that resolves when the initialization is complete.</li>
+</ul>
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>    <h3>src/middlewares/routeSanity.ts</h3>
+    <section data-compodoc="block-methods">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="routeSanity"></a>
+                    <span class="name">
+                        <span ><b>routeSanity</b></span>
+                        <a href="#routeSanity"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>routeSanity(request: <a href="../undefineds/ExpsRequest.html" target="_self">ExpsRequest</a>, response: <a href="../undefineds/ExpsResponse.html" target="_self">ExpsResponse</a>, next: <a href="../undefineds/ExpsNextFunction.html" target="_self">ExpsNextFunction</a>)</code>
+                </td>
+            </tr>
+
+
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Middleware to sanity check the request and response objects.</p>
+<p>This middleware function sets the necessary headers and determines the appropriate response handler
+based on whether the response is an error or if the request matches a route. It then invokes the
+selected response handler to process the response.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>request</td>
+                                            <td>
+                                                            <code><a href="../miscellaneous/typealiases.html#ExpsRequest" target="_self" >ExpsRequest</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>The Express request object.</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                                <td>response</td>
+                                            <td>
+                                                            <code><a href="../miscellaneous/typealiases.html#ExpsResponse" target="_self" >ExpsResponse</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>The Express response object.</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                                <td>next</td>
+                                            <td>
+                                                            <code><a href="../miscellaneous/typealiases.html#ExpsNextFunction" target="_self" >ExpsNextFunction</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>The next middleware function in the stack.</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'miscellaneous-functions';
+            var COMPODOC_CURRENT_PAGE_URL = 'functions.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>
