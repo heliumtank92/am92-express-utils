@@ -325,8 +325,9 @@ export interface ExpsRouteConfig {
  * @export
  * @interface ExpsRouterConfig
  * @typedef {ExpsRouterConfig}
+ * @template {string} [Routes=string]
  */
-export interface ExpsRouterConfig {
+export interface ExpsRouterConfig<Routes extends string = string> {
   /**
    * The name of the router.
    *
@@ -368,7 +369,7 @@ export interface ExpsRouterConfig {
    *
    * @type {?Record<string, ExpsRouteConfig>}
    */
-  routesConfig?: Record<string, ExpsRouteConfig>
+  routesConfig?: Record<Routes, ExpsRouteConfig>
 }
 
 /**
