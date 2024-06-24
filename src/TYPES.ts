@@ -44,20 +44,28 @@ export type ExpsParamsArray = ParamsArray
 export type ExpsParams = ExpsParamsDictionary | ExpsParamsArray
 
 /**
+ * Type definition for the request query object.
+ *
+ * @export
+ * @typedef {ExpsQuery}
+ */
+export type ExpsQuery = Query
+
+/**
  * Type definition for the Express request object.
  *
  * @export
  * @typedef {ExpsRequest}
  * @template [ReqBody=any]
  * @template [ReqParams=ExpsParamsDictionary | any]
- * @template [ReqQuery=Query]
+ * @template [ReqQuery=ExpsQuery]
  * @template [ResBody=ResponseBody]
  * @template {Record<string, any>} [Locals=Record<string, any>]
  */
 export type ExpsRequest<
   ReqBody = any,
   ReqParams = ExpsParamsDictionary | any,
-  ReqQuery = Query,
+  ReqQuery = ExpsQuery,
   ResBody = ResponseBody,
   Locals extends Record<string, any> = Record<string, any>
 > = Request<ReqParams, ResBody, ReqBody, ReqQuery, Locals>
