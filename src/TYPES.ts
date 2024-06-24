@@ -1,6 +1,7 @@
 import { Express, Router, Request, Response, NextFunction } from 'express'
 import expressHttpContext from 'express-http-context'
 import { ParamsDictionary, ParamsArray, Query } from 'express-serve-static-core'
+import ResponseBody from './classes/ResponseBody'
 
 /**
  * Type definition for the Express application instance.
@@ -47,23 +48,30 @@ export type ExpsParams = ExpsParamsDictionary | ExpsParamsArray
  *
  * @export
  * @typedef {ExpsRequest}
+ * @template [ReqBody=any]
+ * @template [ReqParams=ExpsParamsDictionary | any]
+ * @template [ReqQuery=Query]
+ * @template [ResBody=ResponseBody]
+ * @template {Record<string, any>} [Locals=Record<string, any>]
  */
 export type ExpsRequest<
-  PD = ParamsDictionary,
-  ResBody = any,
   ReqBody = any,
+  ReqParams = ExpsParamsDictionary | any,
   ReqQuery = Query,
+  ResBody = ResponseBody,
   Locals extends Record<string, any> = Record<string, any>
-> = Request<PD, ResBody, ReqBody, ReqQuery, Locals>
+> = Request<ReqParams, ResBody, ReqBody, ReqQuery, Locals>
 
 /**
  * Type definition for the Express response object.
  *
  * @export
  * @typedef {ExpsResponse}
+ * @template [ResBody=ResponseBody]
+ * @template {Record<string, any>} [Locals=Record<string, any>]
  */
 export type ExpsResponse<
-  ResBody = any,
+  ResBody = ResponseBody,
   Locals extends Record<string, any> = Record<string, any>
 > = Response<ResBody, Locals>
 
@@ -202,12 +210,15 @@ export interface HttpContext {
  *
  * @export
  * @typedef {ExpsMiddleware}
+ * @template [Req=ExpsRequest]
+ * @template [Res=ExpsResponse]
+ * @template [Next=NextFunction]
  */
-export type ExpsMiddleware = (
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => void | Promise<void>
+export type ExpsMiddleware<
+  Req = ExpsRequest,
+  Res = ExpsResponse,
+  Next = NextFunction
+> = (req: Req, res: Res, next: Next) => void | Promise<void>
 
 /**
  * Type definition for HTTP methods in lowercase.
