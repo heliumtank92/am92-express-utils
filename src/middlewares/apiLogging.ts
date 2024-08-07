@@ -38,6 +38,7 @@ export default function apiLogging(
   })
 
   request.on('aborted', () => {
+    request.isAborted = true
     const logMeta = _buildLogMeta(request)
     const logFunc = _getLogFunc(REQ_ABORTED_STATUS_CODE)
     logFunc(logMeta)
@@ -78,7 +79,8 @@ function _buildLogMeta(
     method,
     headers: reqHeaders,
     body: reqBody = {},
-    disableBodyLog
+    disableBodyLog,
+    isAborted = false
   } = req
 
   const httpVersion = `${httpVersionMajor}.${httpVersionMinor}`
@@ -90,11 +92,13 @@ function _buildLogMeta(
     ? timestamp - (req as any).timestamp
     : -1
 
-  const {
-    statusCode = REQ_ABORTED_STATUS_CODE,
-    statusMessage: status = REQ_ABORTED_STATUS_MESSAGE,
-    body: resBody = {}
-  } = res || {}
+  const statusCode = isAborted
+    ? REQ_ABORTED_STATUS_CODE
+    : res?.statusCode || 500
+  const status = isAborted
+    ? REQ_ABORTED_STATUS_MESSAGE
+    : res?.statusMessage || 'Internal Server Error'
+  const resBody = res?.body || {}
 
   const responseMessage = resBody.message || ''
   const resHeaders = res?.getHeaders() || {}
@@ -102,7 +106,7 @@ function _buildLogMeta(
   const message = `[HTTP/${httpVersion}] ${method} ${requestUrl} | ${statusCode} ${status} | ${responseMessage} ${responseTime}ms`
 
   const logMeta: ApiLoggerLogObject = {
-    type: 'REQ_RES_LOG',
+    type: res ? 'REQ_RES_LOG' : 'REQ_LOG',
     message,
 
     req: {

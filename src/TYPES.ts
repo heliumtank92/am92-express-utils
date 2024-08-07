@@ -451,6 +451,7 @@ declare global {
     /** @ignore */
     interface Request {
       isMatch?: boolean
+      isAborted?: boolean
       timestamp?: number
       disableBodyLog?: boolean
     }
