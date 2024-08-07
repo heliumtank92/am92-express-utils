@@ -30,6 +30,7 @@ export default function handleResponse(
       : _handleNoRouteResponse
 
   responseHandler(request, response, next)
+  response.emit(CONSTANTS.RESPONSE_COMPLETED_EVENT)
 }
 
 /** @ignore */

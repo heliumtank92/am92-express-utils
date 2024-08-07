@@ -5,6 +5,12 @@ import {
 } from '@am92/api-logger'
 import httpContext from '../lib/httpContext'
 import { ExpsRequest, ExpsResponse, ExpsNextFunction } from '../TYPES'
+import CONSTANTS from '../CONSTANTS'
+
+/** @ignore */
+const REQ_ABORTED_STATUS_CODE = 499
+/** @ignore */
+const REQ_ABORTED_STATUS_MESSAGE = 'Request Aborted'
 
 /**
  * Middleware to log API requests and responses.
@@ -25,9 +31,15 @@ export default function apiLogging(
 ): void {
   request.timestamp = Date.now()
 
-  response.on('finish', () => {
+  response.on(CONSTANTS.RESPONSE_COMPLETED_EVENT, () => {
     const logMeta = _buildLogMeta(request, response)
     const logFunc = _getLogFunc(logMeta.res?.statusCode || 500)
+    logFunc(logMeta)
+  })
+
+  request.on('aborted', () => {
+    const logMeta = _buildLogMeta(request)
+    const logFunc = _getLogFunc(REQ_ABORTED_STATUS_CODE)
     logFunc(logMeta)
   })
 
@@ -56,7 +68,7 @@ export function logManager(disableBodyLog: boolean) {
 /** @ignore */
 function _buildLogMeta(
   req: ExpsRequest,
-  res: ExpsResponse
+  res?: ExpsResponse
 ): ApiLoggerLogObject {
   const {
     httpVersionMajor,
@@ -78,10 +90,14 @@ function _buildLogMeta(
     ? timestamp - (req as any).timestamp
     : -1
 
-  const { statusCode, statusMessage: status, body: resBody = {} } = res
+  const {
+    statusCode = REQ_ABORTED_STATUS_CODE,
+    statusMessage: status = REQ_ABORTED_STATUS_MESSAGE,
+    body: resBody = {}
+  } = res || {}
 
   const responseMessage = resBody.message || ''
-  const resHeaders = res.getHeaders()
+  const resHeaders = res?.getHeaders() || {}
 
   const message = `[HTTP/${httpVersion}] ${method} ${requestUrl} | ${statusCode} ${status} | ${responseMessage} ${responseTime}ms`
 
