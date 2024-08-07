@@ -129,6 +129,13 @@ export interface ExpsConstants {
    * @type {string}
    */
   PLAINTEXT_ENCRYPTION_KEY: string
+
+  /**
+   * Event name for the response completed event.
+   *
+   * @type {string}
+   */
+  RESPONSE_COMPLETED_EVENT: string
 }
 
 /**
