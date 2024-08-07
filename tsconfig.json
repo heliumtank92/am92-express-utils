@@ -1,9 +1,8 @@
 {
-  "include": [
-    "./src/*.mjs"
-  ],
+  "include": ["./src/*.mjs"],
   "compilerOptions": {
-    "moduleResolution": "node16",
+    "module": "Node16",
+    "moduleResolution": "Node16",
     "allowJs": true,
     "declaration": true,
     "emitDeclarationOnly": true,

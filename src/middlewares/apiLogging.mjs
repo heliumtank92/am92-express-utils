@@ -1,26 +1,36 @@
 import { API_LOGGER_TRACKING_ID, namespace } from '@am92/api-logger'
 import httpContext from '../lib/httpContext.mjs'
+import EXPS_CONST from '../EXPS_CONST.mjs'
 
-export default function apiLogging (request, response, next) {
+const REQ_ABORTED_STATUS_CODE = 499
+const REQ_ABORTED_STATUS_MESSAGE = 'Request Aborted'
+
+export default function apiLogging(request, response, next) {
   request.timestamp = Date.now()
 
-  response.on('finish', () => {
+  response.on(EXPS_CONST.RESPONSE_COMPLETED_EVENT, () => {
     const logMeta = _buildLogMeta(request, response)
     const logFunc = _getLogFunc(logMeta.res.statusCode)
+    logFunc(logMeta)
+  })
+
+  request.on('aborted', () => {
+    const logMeta = _buildLogMeta(request)
+    const logFunc = _getLogFunc(REQ_ABORTED_STATUS_CODE)
     logFunc(logMeta)
   })
 
   namespace.run(() => _setTrackingId(next))
 }
 
-export function logManager (disableBodyLog) {
+export function logManager(disableBodyLog) {
   return function (request, response, next) {
     request.disableBodyLog = disableBodyLog
     process.nextTick(next)
   }
 }
 
-function _buildLogMeta (req, res) {
+function _buildLogMeta(req, res) {
   const {
     httpVersionMajor,
     httpVersionMinor,
@@ -37,16 +47,16 @@ function _buildLogMeta (req, res) {
   const requestUrl = originalUrl || url
 
   const timestamp = Date.now()
-  const responseTime = req.timestamp ? (timestamp - req.timestamp) : -1
+  const responseTime = req.timestamp ? timestamp - req.timestamp : -1
 
   const {
-    statusCode,
-    statusMessage: status,
+    statusCode = REQ_ABORTED_STATUS_CODE,
+    statusMessage: status = REQ_ABORTED_STATUS_MESSAGE,
     body: resBody = {}
-  } = res
+  } = res || {}
 
   const responseMessage = resBody.message || ''
-  const resHeaders = res.getHeaders()
+  const resHeaders = res?.getHeaders() || {}
 
   const message = `[HTTP/${httpVersion}] ${method} ${requestUrl} | ${statusCode} ${status} | ${responseMessage} ${responseTime}ms`
 
@@ -76,7 +86,7 @@ function _buildLogMeta (req, res) {
   return logMeta
 }
 
-function _getLogFunc (statusCode) {
+function _getLogFunc(statusCode) {
   if (statusCode >= 200 && statusCode < 300) {
     return console.httpSuccess || console.info
   }
@@ -88,7 +98,7 @@ function _getLogFunc (statusCode) {
   return console.httpError || console.error
 }
 
-function _setTrackingId (next) {
+function _setTrackingId(next) {
   if (namespace.active) {
     const sessionId = httpContext.getSessionId()
     const requestId = httpContext.getRequestId()

@@ -9,4 +9,4 @@ export default ExpressUtils;
 declare namespace ExpressUtils {
     export { initialize };
 }
-import initialize from "./lib/initialize.mjs";
+import initialize from './lib/initialize.mjs';

@@ -1,7 +1,7 @@
 export default httpContext;
 declare namespace httpContext {
-    export const get: typeof expressHttpContext.get;
-    export const set: typeof expressHttpContext.set;
+    export let get: typeof expressHttpContext.get;
+    export let set: typeof expressHttpContext.set;
     export { getRequestId };
     export { setRequestId };
     export { getSessionId };
@@ -13,7 +13,7 @@ declare namespace httpContext {
     export { getPlaintextEncryptionKey };
     export { setPlaintextEncryptionKey };
 }
-import expressHttpContext from "express-http-context";
+import expressHttpContext from 'express-http-context';
 declare function getRequestId(): any;
 declare function setRequestId(requestId: any): void;
 declare function getSessionId(): any;

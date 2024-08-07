@@ -13,6 +13,7 @@ export default function handleResponse(request, response, next) {
       : _handleNoRouteResponse
 
   responseHandler(request, response, next)
+  response.emit(EXPS_CONST.RESPONSE_COMPLETED_EVENT)
 }
 
 function _setHeaders(request, response) {
