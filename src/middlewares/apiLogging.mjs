@@ -1,3 +1,4 @@
+import http from 'http'
 import { API_LOGGER_TRACKING_ID, namespace } from '@am92/api-logger'
 import httpContext from '../lib/httpContext.mjs'
 import EXPS_CONST from '../EXPS_CONST.mjs'
@@ -56,7 +57,7 @@ function _buildLogMeta(req, res) {
     : res?.statusCode || 500
   const status = isAborted
     ? REQ_ABORTED_STATUS_MESSAGE
-    : res?.statusMessage || 'Internal Server Error'
+    : http.STATUS_CODES[statusCode] || ''
   const resBody = res?.body || {}
 
   const responseMessage = resBody.message || ''
