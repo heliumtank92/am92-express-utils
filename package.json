@@ -1,6 +1,6 @@
 {
   "name": "@am92/express-utils",
-  "version": "2.0.16",
+  "version": "2.0.17",
   "description": "Utilities for Express Framework",
   "sideEffects": false,
   "types": "dist/index.d.ts",
@@ -26,7 +26,7 @@
   "homepage": "https://heliumtank92.github.io/am92-express-utils",
   "dependencies": {
     "@am92/api-crypto": "^2.0.4",
-    "@am92/api-logger": "^2.0.7",
+    "@am92/api-logger": "^2.0.8",
     "express-http-context": "^1.2.4",
     "lodash": "^4.17.21"
   },
